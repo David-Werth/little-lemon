@@ -6,12 +6,16 @@ module.exports = {
 		'./app/**/*.{js,ts,jsx,tsx,mdx}',
 	],
 	theme: {
-		colors: {
-			green: '#495e57',
-			yellow: '#f4ce14',
-		},
 		fontFamily: {
-			karla: ['Karla', 'sans-serif'],
+			karla: ['var(--font-karla)'],
+			markazi: ['var(--font-markazi)'],
+		},
+		extend: {
+			colors: {
+				green: '#495e57',
+				yellow: '#f4ce14',
+				white: '#fff',
+			},
 		},
 	},
 	plugins: [],
