@@ -1,7 +1,9 @@
+import UnderConstruction from '@/components/UnderConstruction';
+
 const Page = () => {
 	return (
-		<section>
-			<p>login</p>
+		<section className="flex justify-center">
+			<UnderConstruction />
 		</section>
 	);
 };

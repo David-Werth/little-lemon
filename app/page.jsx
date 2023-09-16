@@ -48,17 +48,17 @@ export default function Home() {
 							Online Menu
 						</Link>
 					</div>
-					<div className="flex flex-col gap-5 sm:flex-row">
+					<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 						<SpecialsCard />
 						<SpecialsCard />
 						<SpecialsCard />
 					</div>
 				</div>
 			</section>
-			<section className="flex justify-center py-8 text-white bg-green">
+			<section className="flex justify-center py-10 text-white bg-green">
 				<div className="w-11/12 max-w-5xl">
 					<h3 className="mb-10 text-4xl font-markazi">What people say about us!</h3>
-					<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
+					<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 						<TestimonialCard />
 						<TestimonialCard />
 						<TestimonialCard />
@@ -66,9 +66,9 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
-			<section className="flex justify-center py-8">
-				<div className="flex flex-col w-11/12 max-w-5xl gap-10 md:flex-row">
-					<div className="flex-1">
+			<section className="flex justify-center py-10">
+				<div className="grid w-11/12 max-w-5xl grid-cols-1 gap-10 lg:grid-cols-2">
+					<div>
 						<h1 className="text-6xl font-normal text-yellow font-markazi">
 							Little Lemon
 						</h1>
@@ -88,9 +88,17 @@ export default function Home() {
 							dolores eos qui ratione voluptatem sequi nesciunt.
 						</p>
 					</div>
-					<div className="self-center object-cover w-full md:flex-1">
-						<Image src={chefs} alt="chefs" className="max-w-full mb-4 rounded-2xl" />
-						<Image src={chefs2} alt="chefs" className="max-w-full rounded-2xl" />
+					<div className="flex flex-col gap-5 sm:flex-row lg:flex-col ">
+						<Image
+							src={chefs}
+							alt="chefs"
+							className="object-cover w-full sm:w-3/6 lg:w-full rounded-2xl"
+						/>
+						<Image
+							src={chefs2}
+							alt="chefs"
+							className="object-cover w-full sm:w-3/6 lg:w-full rounded-2xl"
+						/>
 					</div>
 				</div>
 			</section>
