@@ -34,6 +34,8 @@ export default function Home() {
 						className="self-center object-cover w-full -mb-16 h-96 rounded-2xl md:flex-1"
 						src={hero}
 						alt="bruscetta"
+						priority={true}
+						placeholder="blur"
 					/>
 				</div>
 			</section>
@@ -92,12 +94,12 @@ export default function Home() {
 						<Image
 							src={chefs}
 							alt="chefs"
-							className="object-cover w-full sm:w-3/6 lg:w-full rounded-2xl"
+							className="object-cover w-full sm:w-[48%] lg:w-full rounded-2xl"
 						/>
 						<Image
 							src={chefs2}
 							alt="chefs"
-							className="object-cover w-full sm:w-3/6 lg:w-full rounded-2xl"
+							className="object-cover w-full sm:w-[48%] lg:w-full rounded-2xl"
 						/>
 					</div>
 				</div>

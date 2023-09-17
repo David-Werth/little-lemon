@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
 		<html lang="en">
 			<body className={`${karla.variable} ${markazi.variable}`}>
 				<Header />
-				<main>{children}</main>
+				<main className="top-[86.14px] relative z-0 mb-[86.14px]">{children}</main>
 				<Footer />
 			</body>
 		</html>

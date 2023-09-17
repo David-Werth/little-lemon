@@ -1,3 +1,5 @@
+'use client';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faEnvelope,
@@ -14,9 +16,6 @@ import {
 	faTwitter,
 	faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-
-let something =
-	'grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
 
 const Footer = () => {
 	return (
