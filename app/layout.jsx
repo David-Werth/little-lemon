@@ -1,5 +1,8 @@
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
 import './globals.css';
+
 import { Karla } from 'next/font/google';
 import { Markazi_Text } from 'next/font/google';
 
@@ -8,8 +11,6 @@ const markazi = Markazi_Text({
 	variable: '--font-markazi',
 	subsets: ['latin'],
 });
-
-import Footer from '@/components/Footer';
 
 export const metadata = {
 	title: 'Little Lemon',
