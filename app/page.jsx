@@ -34,8 +34,8 @@ export default function Home() {
 						className="self-center object-cover w-full -mb-16 h-96 rounded-2xl md:flex-1"
 						width={500}
 						height={500}
-						src="/hero.jpg"
-						alt="bruscetta"
+						src={hero}
+						alt="bruschtta"
 					/>
 				</div>
 			</section>
