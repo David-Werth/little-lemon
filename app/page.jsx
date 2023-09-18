@@ -34,8 +34,6 @@ export default function Home() {
 						className="self-center object-cover w-full -mb-16 h-96 rounded-2xl md:flex-1"
 						src={hero}
 						alt="bruscetta"
-						priority={true}
-						placeholder="blur"
 					/>
 				</div>
 			</section>
