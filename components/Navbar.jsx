@@ -40,7 +40,7 @@ const Navbar = () => {
 
 	return (
 		<nav className="flex flex-row items-center justify-between w-11/12 max-w-5xl bg-white ">
-			<Link href="">
+			<Link href="/">
 				<Image src={logo} alt="logo" className="w-64 my-2 lg:inline" />
 			</Link>
 			<FontAwesomeIcon
