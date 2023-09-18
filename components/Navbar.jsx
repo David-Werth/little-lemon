@@ -56,20 +56,20 @@ const Navbar = () => {
 				<Link onClick={() => setClicked(false)} className="nav-link" href="/">
 					HOME
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="about">
+				<Link onClick={() => setClicked(false)} className="nav-link" href="/about">
 					ABOUT
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="menu">
+				<Link onClick={() => setClicked(false)} className="nav-link" href="/menu">
 					MENU
 				</Link>
 				<Link
 					onClick={() => setClicked(false)}
 					className="nav-link"
-					href="reservations"
+					href="/reservations"
 				>
 					RESERVATIONS
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="order">
+				<Link onClick={() => setClicked(false)} className="nav-link" href="/order">
 					ORDER ONLINE
 				</Link>
 				<Link onClick={() => setClicked(false)} className="nav-link" href="login">
