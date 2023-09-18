@@ -33,21 +33,20 @@ const Footer = () => {
 						<Link href="/login">Login</Link>
 					</ul>
 				</nav>
-				<div>
+				<div className="flex flex-col gap-1">
 					<h4 className="mb-2 font-bold tracking-widest">CONTACT US</h4>
-
-					<p className="italic">
-						<FontAwesomeIcon icon={faLocationDot} className="inline h-4 mr-4" />
-						678 Pisa Ave, Chicago, IL 60611
-					</p>
-					<p>
-						<FontAwesomeIcon icon={faPhone} className="inline h-4 mr-4" />
-						(312) 593-2744
-					</p>
-					<p>
+					<div>
+						<FontAwesomeIcon icon={faLocationDot} className="h-4 mr-4" />
+						<p className="inline italic">678 Pisa Ave, Chicago, IL 60611</p>
+					</div>
+					<div>
+						<FontAwesomeIcon icon={faPhone} className="h-4 mr-4 " />
+						<p className="inline italic">(312) 593-2744</p>
+					</div>
+					<div>
 						<FontAwesomeIcon icon={faEnvelope} className="inline h-4 mr-4" />
-						customer@littlelemon.com
-					</p>
+						<p className="inline italic">customer@littlelemon.com</p>
+					</div>
 				</div>
 				<div>
 					<h4 className="mb-2 font-bold tracking-widest">CONNECT WITH US</h4>
