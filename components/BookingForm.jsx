@@ -2,16 +2,7 @@
 
 import { useState } from 'react';
 
-const BookingForm = () => {
-	const [availableTimes, setAvailableTimes] = useState([
-		'17:00',
-		'18:00',
-		'19:00',
-		'20:00',
-		'21:00',
-		'22:00',
-	]);
-
+const BookingForm = ({ availableTimes, dispatch }) => {
 	const [resDate, setResDate] = useState('');
 	const [resTime, setResTime] = useState('');
 	const [resGuests, setResGuests] = useState('');
@@ -19,7 +10,11 @@ const BookingForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(resDate, resTime, resGuests, resOccasion);
+		dispatch({
+			type: 'selected_date',
+			time: resTime,
+			date: resDate,
+		});
 	};
 
 	return (
@@ -33,7 +28,9 @@ const BookingForm = () => {
 					type="date"
 					id="res-date"
 					value={resDate}
-					onChange={(e) => setResDate(e.target.value)}
+					onChange={(e) => {
+						setResDate(e.target.value);
+					}}
 				/>
 			</div>
 
