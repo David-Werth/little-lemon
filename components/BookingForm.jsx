@@ -7,19 +7,21 @@ const BookingForm = ({ availableTimes, dispatch }) => {
 	const [resTime, setResTime] = useState(availableTimes[0]);
 	const [resGuests, setResGuests] = useState(1);
 	const [resOccasion, setResOccasion] = useState('Birthday');
+	const [formError, setFormError] = useState(false);
+	const [formData, setFormData] = useState();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (resDate && resTime && resGuests && resOccasion != '') {
-			console.log('filled');
+		if (resDate != '') {
+			setFormError(false);
 			dispatch({
 				type: 'selected_date',
 				time: resTime,
 				date: resDate,
 			});
 		} else {
-			console.log('not filled');
+			setFormError(true);
 		}
 	};
 
@@ -40,7 +42,6 @@ const BookingForm = ({ availableTimes, dispatch }) => {
 					className="p-4 font-bold border rounded-md shadow-md border-green"
 				/>
 			</div>
-
 			<div className="flex flex-col gap-1">
 				<label htmlFor="res-time">Choose time</label>
 				<select
@@ -56,7 +57,6 @@ const BookingForm = ({ availableTimes, dispatch }) => {
 			</div>
 			<div className="flex flex-col gap-1">
 				<label htmlFor="guests">Number of guests</label>
-
 				<select
 					id="guests"
 					value={resGuests}
@@ -87,11 +87,16 @@ const BookingForm = ({ availableTimes, dispatch }) => {
 					<option>Anniversary</option>
 				</select>
 			</div>
-			<input
-				type="submit"
-				value="Make Your reservation"
-				className="px-4 py-3 font-bold transition-colors border-4 rounded-full cursor-pointer md:col-span-2 hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow"
-			/>
+			<div className="text-center md:col-span-2">
+				{formError && (
+					<p className="text-red-800 animate-pulse">Please fill all the fields!</p>
+				)}
+				<input
+					type="submit"
+					value="Make Your reservation"
+					className="px-4 py-3 font-bold transition-colors border-4 rounded-full cursor-pointer hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow"
+				/>
+			</div>
 		</form>
 	);
 };
