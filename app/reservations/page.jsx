@@ -22,15 +22,10 @@ const Page = () => {
 
 	const [availableTimes, dispatch] = useReducer(updateTimes, initialTimes);
 
-	useEffect(() => {
-		const submitForm = () => {
-			submitAPI(formData) ? setIsConfirmed(true) : null;
-		};
-
-		return () => {
-			submitForm();
-		};
-	}, [formData]);
+	const submitForm = () => {
+		console.log(formData);
+		submitAPI(formData) ? setIsConfirmed(true) : null;
+	};
 
 	return (
 		<section className="flex justify-center">
@@ -43,6 +38,7 @@ const Page = () => {
 						availableTimes={availableTimes}
 						dispatch={dispatch}
 						setFormData={setFormData}
+						submitForm={submitForm}
 					/>
 				) : (
 					<BookingConfirmation formData={formData} />

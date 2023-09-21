@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-const BookingForm = ({ availableTimes, dispatch, setFormData }) => {
+const BookingForm = ({ availableTimes, dispatch, setFormData, submitForm }) => {
 	const [resDate, setResDate] = useState('');
 	const [resTime, setResTime] = useState(availableTimes[0]);
 	const [resGuests, setResGuests] = useState(1);
@@ -20,6 +20,7 @@ const BookingForm = ({ availableTimes, dispatch, setFormData }) => {
 				guests: resGuests,
 				occasion: resOccasion,
 			});
+			submitForm();
 			setResDate('');
 			setResTime(availableTimes[0]);
 			setResGuests(1);
@@ -46,8 +47,11 @@ const BookingForm = ({ availableTimes, dispatch, setFormData }) => {
 							type: 'selected_date',
 							date: new Date(e.target.value),
 						});
+						setFormError(false);
 					}}
-					className="p-4 font-bold border rounded-md shadow-md border-green"
+					className={`p-4 font-bold border rounded-md shadow-md border-green ${
+						formError && 'border-red-700 text-red-700 border-2 animate-pulse'
+					}`}
 				/>
 			</div>
 			<div className="flex flex-col gap-1">
@@ -96,9 +100,7 @@ const BookingForm = ({ availableTimes, dispatch, setFormData }) => {
 				</select>
 			</div>
 			<div className="text-center md:col-span-2">
-				{formError && (
-					<p className="text-red-800 animate-pulse">Please fill all the fields!</p>
-				)}
+				{formError && <p className="text-red-700">Please fill all the fields!</p>}
 				<input
 					type="submit"
 					value="Make Your reservation"
