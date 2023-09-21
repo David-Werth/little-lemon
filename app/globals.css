@@ -7,3 +7,7 @@
 		@apply flex items-end justify-end py-6 transition-colors px-9 lg:px-4 lg:items-center lg:justify-start hover:bg-yellow;
 	}
 }
+
+* {
+	-webkit-appearance: none;
+}
