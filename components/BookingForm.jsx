@@ -2,24 +2,28 @@
 
 import { useState } from 'react';
 
-const BookingForm = ({ availableTimes, dispatch }) => {
+const BookingForm = ({ availableTimes, dispatch, setFormData }) => {
 	const [resDate, setResDate] = useState('');
 	const [resTime, setResTime] = useState(availableTimes[0]);
 	const [resGuests, setResGuests] = useState(1);
 	const [resOccasion, setResOccasion] = useState('Birthday');
 	const [formError, setFormError] = useState(false);
-	const [formData, setFormData] = useState();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		if (resDate != '') {
 			setFormError(false);
-			dispatch({
-				type: 'selected_date',
-				time: resTime,
+			setFormData({
 				date: resDate,
+				time: resTime,
+				guests: resGuests,
+				occasion: resOccasion,
 			});
+			setResDate('');
+			setResTime(availableTimes[0]);
+			setResGuests(1);
+			setResOccasion('Birthday');
 		} else {
 			setFormError(true);
 		}
@@ -38,6 +42,10 @@ const BookingForm = ({ availableTimes, dispatch }) => {
 					value={resDate}
 					onChange={(e) => {
 						setResDate(e.target.value);
+						dispatch({
+							type: 'selected_date',
+							date: new Date(e.target.value),
+						});
 					}}
 					className="p-4 font-bold border rounded-md shadow-md border-green"
 				/>
