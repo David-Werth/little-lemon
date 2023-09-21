@@ -20,8 +20,6 @@ const Page = () => {
 		}
 	};
 
-	console.log(submitAPI(formData));
-
 	const [availableTimes, dispatch] = useReducer(updateTimes, initialTimes);
 
 	const submitForm = () => {
