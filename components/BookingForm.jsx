@@ -40,6 +40,7 @@ const BookingForm = ({ availableTimes, dispatch, setFormData, submitForm }) => {
 				<input
 					type="date"
 					id="res-date"
+					placeholder="dd/mm/yyyy"
 					value={resDate}
 					onChange={(e) => {
 						setResDate(e.target.value);
