@@ -40,7 +40,7 @@ const Navbar = () => {
 
 	return (
 		<nav className="flex flex-row items-center justify-between w-11/12 max-w-5xl bg-white ">
-			<Link href="">
+			<Link href="/">
 				<Image src={logo} alt="logo" className="w-64 my-2 lg:inline" />
 			</Link>
 			<FontAwesomeIcon
@@ -50,26 +50,26 @@ const Navbar = () => {
 			/>
 			<ul
 				className={`${
-					clicked && isMobile ? 'right-0' : '-right-[50%]'
+					clicked && isMobile ? 'right-0' : '-right-[60%]'
 				} absolute min-w-[50%] transition-[right] lg:transition-none lg:w-auto top-[86.14px] lg:top-0 lg:relative lg:right-0 lg:flex flex-col lg:flex-row h-screen lg:h-full text-base bg-white  text-green font-karla`}
 			>
 				<Link onClick={() => setClicked(false)} className="nav-link" href="/">
 					HOME
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="about">
+				<Link onClick={() => setClicked(false)} className="nav-link" href="/about">
 					ABOUT
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="menu">
+				<Link onClick={() => setClicked(false)} className="nav-link" href="/menu">
 					MENU
 				</Link>
 				<Link
 					onClick={() => setClicked(false)}
 					className="nav-link"
-					href="reservations"
+					href="/reservations"
 				>
 					RESERVATIONS
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="order">
+				<Link onClick={() => setClicked(false)} className="nav-link" href="/order">
 					ORDER ONLINE
 				</Link>
 				<Link onClick={() => setClicked(false)} className="nav-link" href="login">
