@@ -26,7 +26,6 @@ const Page = () => {
 
 	useEffect(() => {
 		const submitForm = () => {
-			console.log(formData);
 			submitAPI(formData) ? setIsConfirmed(true) : null;
 		};
 
