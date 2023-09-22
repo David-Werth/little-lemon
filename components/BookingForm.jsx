@@ -15,7 +15,7 @@ const BookingForm = ({ availableTimes, dispatch, setFormData, submitForm }) => {
 		if (resDate != '') {
 			setFormError(false);
 			setFormData({
-				date: resDate,
+				date: new Date(resDate).toDateString(),
 				time: resTime,
 				guests: resGuests,
 				occasion: resOccasion,
@@ -40,7 +40,6 @@ const BookingForm = ({ availableTimes, dispatch, setFormData, submitForm }) => {
 				<input
 					type="date"
 					id="res-date"
-					placeholder="dd/mm/yyyy"
 					value={resDate}
 					onChange={(e) => {
 						setResDate(e.target.value);

@@ -23,7 +23,6 @@ const Page = () => {
 	const [availableTimes, dispatch] = useReducer(updateTimes, initialTimes);
 
 	const submitForm = () => {
-		console.log(formData);
 		submitAPI(formData) ? setIsConfirmed(true) : null;
 	};
 
