@@ -1,14 +1,26 @@
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
-import customer1 from '../public/customer1.jpg';
 
-const TestimonialCard = () => {
+const TestimonialCard = ({ img, name }) => {
 	return (
 		<div className="p-4 bg-white rounded-2xl font-karla text-green">
-			<div className="flex flex-col items-center mb-4">
-				<Image src={customer1} alt="customer" className="w-32 rounded-full" />
-				<h4 className="text-lg font-bold ">Customer Name</h4>
+			<div className="flex flex-col items-center mb-3">
+				<Image
+					quality={50}
+					src={img}
+					alt="customer"
+					className="object-cover w-32 h-32 rounded-full"
+				/>
+				<h4 className="text-lg font-bold ">{name}</h4>
 			</div>
-			<div></div>
+			<div className="text-yellow">
+				<FontAwesomeIcon icon={faStar} />
+				<FontAwesomeIcon icon={faStar} />
+				<FontAwesomeIcon icon={faStar} />
+				<FontAwesomeIcon icon={faStar} />
+				<FontAwesomeIcon icon={faStar} />
+			</div>
 			<p>
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua."

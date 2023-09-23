@@ -5,6 +5,15 @@ import hero from '../public/hero.jpg';
 import chefs from '../public/chefs.jpg';
 import chefs2 from '../public/chefs2.jpg';
 
+import customer1 from '../public/customer1.jpg';
+import customer2 from '../public/customer2.jpg';
+import customer3 from '../public/customer3.jpg';
+import customer4 from '../public/customer4.jpg';
+
+import special1 from '../public/special1.jpg';
+import special2 from '../public/special2.jpg';
+import special3 from '../public/special3.jpg';
+
 import SpecialsCard from '@/components/SpecialsCard';
 import TestimonialCard from '@/components/TestimonialCard';
 
@@ -51,9 +60,30 @@ export default function Home() {
 						</Link>
 					</div>
 					<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-						<SpecialsCard />
-						<SpecialsCard />
-						<SpecialsCard />
+						<SpecialsCard
+							img={special1}
+							title={'Greek Salad'}
+							price={'$6.99'}
+							description={
+								'The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.'
+							}
+						/>
+						<SpecialsCard
+							img={special2}
+							title={'Bruschetta'}
+							price={'$5.99'}
+							description={
+								'Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.'
+							}
+						/>
+						<SpecialsCard
+							img={special3}
+							title={'Lemon Dessert'}
+							price={'$4.99'}
+							description={
+								"This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined."
+							}
+						/>
 					</div>
 				</div>
 			</section>
@@ -61,10 +91,10 @@ export default function Home() {
 				<div className="w-11/12 max-w-5xl">
 					<h3 className="mb-10 text-4xl font-markazi">What people say about us!</h3>
 					<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-						<TestimonialCard />
-						<TestimonialCard />
-						<TestimonialCard />
-						<TestimonialCard />
+						<TestimonialCard img={customer1} name={'Marlon Harbinger'} />
+						<TestimonialCard img={customer2} name={'Amir Ashkan'} />
+						<TestimonialCard img={customer3} name={'Carol Beam'} />
+						<TestimonialCard img={customer4} name={'Jen Markazi'} />
 					</div>
 				</div>
 			</section>
