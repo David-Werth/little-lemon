@@ -9,22 +9,34 @@ const BookingForm = ({ availableTimes, dispatch, setFormData, submitForm }) => {
 	const [resOccasion, setResOccasion] = useState('Birthday');
 	const [formError, setFormError] = useState(false);
 
+	const handleDateChange = (e) => {
+		setResDate(e.target.value);
+		dispatch({
+			type: 'selected_date',
+			date: new Date(e.target.value),
+		});
+		setFormError(false);
+	};
+
+	const formReset = () => {
+		setResDate('');
+		setResTime(availableTimes[0]);
+		setResGuests(1);
+		setResOccasion('Birthday');
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		if (resDate != '') {
+		if (resDate) {
 			setFormError(false);
 			setFormData({
-				date: new Date(resDate).toDateString(),
-				time: resTime,
-				guests: resGuests,
-				occasion: resOccasion,
+				resDate,
+				resTime,
+				resGuests,
+				resOccasion,
 			});
 			submitForm();
-			setResDate('');
-			setResTime(availableTimes[0]);
-			setResGuests(1);
-			setResOccasion('Birthday');
+			formReset();
 		} else {
 			setFormError(true);
 		}
@@ -39,18 +51,12 @@ const BookingForm = ({ availableTimes, dispatch, setFormData, submitForm }) => {
 				<label htmlFor="res-date">Choose date</label>
 				<input
 					type="date"
+					placeholder="mm/dd/yyyy"
 					id="res-date"
 					value={resDate}
-					onChange={(e) => {
-						setResDate(e.target.value);
-						dispatch({
-							type: 'selected_date',
-							date: new Date(e.target.value),
-						});
-						setFormError(false);
-					}}
+					onChange={handleDateChange}
 					className={`p-4 font-bold border rounded-md shadow-md border-green ${
-						formError && 'border-red-700 text-red-700 border-2 animate-pulse'
+						formError && 'border-red-700 text-red-700 border-2'
 					}`}
 				/>
 			</div>
@@ -100,7 +106,7 @@ const BookingForm = ({ availableTimes, dispatch, setFormData, submitForm }) => {
 				</select>
 			</div>
 			<div className="text-center md:col-span-2">
-				{formError && <p className="text-red-700">Please fill all the fields!</p>}
+				{formError && <p className="text-red-700">Please choose a date!</p>}
 				<input
 					type="submit"
 					value="Make Your reservation"
