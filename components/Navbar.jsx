@@ -59,8 +59,8 @@ const Navbar = () => {
 				<Link onClick={() => setClicked(false)} className="nav-link" href="/about">
 					ABOUT
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="/menu">
-					MENU
+				<Link onClick={() => setClicked(false)} className="nav-link" href="/order">
+					ORDER ONLINE
 				</Link>
 				<Link
 					onClick={() => setClicked(false)}
@@ -68,9 +68,6 @@ const Navbar = () => {
 					href="/reservations"
 				>
 					RESERVATIONS
-				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="/order">
-					ORDER ONLINE
 				</Link>
 				<Link onClick={() => setClicked(false)} className="nav-link" href="login">
 					LOGIN

@@ -53,7 +53,7 @@ export default function Home() {
 					<div className="flex items-center justify-between mb-14">
 						<h3 className="text-4xl font-markazi">This weeks specials!</h3>
 						<Link
-							href="/menu"
+							href="/order"
 							className="flex-shrink-0 px-4 py-3 font-bold transition-colors border-4 rounded-full hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow text-green font-karla"
 						>
 							Online Menu

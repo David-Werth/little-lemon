@@ -14,12 +14,12 @@ const TestimonialCard = ({ img, name }) => {
 				/>
 				<h4 className="text-lg font-bold ">{name}</h4>
 			</div>
-			<div className="text-yellow">
-				<FontAwesomeIcon icon={faStar} />
-				<FontAwesomeIcon icon={faStar} />
-				<FontAwesomeIcon icon={faStar} />
-				<FontAwesomeIcon icon={faStar} />
-				<FontAwesomeIcon icon={faStar} />
+			<div className="flex text-yellow">
+				<FontAwesomeIcon className="h-4" icon={faStar} />
+				<FontAwesomeIcon className="h-4" icon={faStar} />
+				<FontAwesomeIcon className="h-4" icon={faStar} />
+				<FontAwesomeIcon className="h-4" icon={faStar} />
+				<FontAwesomeIcon className="h-4" icon={faStar} />
 			</div>
 			<p>
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

@@ -11,4 +11,5 @@
 * {
 	-webkit-appearance: none;
 	appearance: none;
+	scroll-behavior: smooth;
 }

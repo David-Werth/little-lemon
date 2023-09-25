@@ -27,9 +27,8 @@ const Footer = () => {
 					<ul className="flex flex-col">
 						<Link href="/">Home</Link>
 						<Link href="/about">About</Link>
-						<Link href="/menu">Menu</Link>
-						<Link href="/reservations">Reservations</Link>
 						<Link href="/order">Order online</Link>
+						<Link href="/reservations">Reservations</Link>
 						<Link href="/login">Login</Link>
 					</ul>
 				</nav>
