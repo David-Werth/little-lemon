@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -7,22 +5,45 @@ import {
 	faMinus,
 	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import img from '../public/special3.jpg';
+import getLocalStorage from '@/utils/getLocalStorage';
 
-const MenuItem = ({ title, price, description }) => {
+const getInitCount = (itemId) => {
+	if (getLocalStorage()) {
+		let localCount = 0;
+		getLocalStorage().map((i) => {
+			if (i.itemId === itemId) {
+				localCount = parseInt(i.itemCount);
+			}
+		});
+		return localCount;
+	}
+	return 0;
+};
+
+const MenuItem = ({
+	itemId,
+	title,
+	price,
+	description,
+	updateCart,
+	addItemToCart,
+	removeItemFromCart,
+}) => {
 	const [isInCart, setIsInCart] = useState(false);
-	const [itemCount, setItemCount] = useState(0);
+	const [itemCount, setItemCount] = useState(getInitCount(itemId));
 	const [err, setErr] = useState(false);
 
 	const handleAdd = () => {
-		setIsInCart((prev) => !prev);
 		setItemCount(1);
+		const item = { itemId, itemCount };
+		addItemToCart(item);
 	};
 
 	const handleIncrease = () => {
 		if (itemCount < 99) {
-			let increasedCount = itemCount + 1;
+			const increasedCount = parseInt(itemCount) + 1;
 			setItemCount(increasedCount);
 		} else {
 			setErr(true);
@@ -30,13 +51,47 @@ const MenuItem = ({ title, price, description }) => {
 	};
 
 	const handleDecrease = () => {
-		if (itemCount > 1) {
-			let decreasedCount = itemCount - 1;
+		const item = { itemId, itemCount };
+		if (itemCount >= 1) {
+			const decreasedCount = parseInt(itemCount) - 1;
 			setItemCount(decreasedCount);
+			if (decreasedCount === 0) {
+				removeItemFromCart(item);
+			}
+		}
+	};
+
+	useEffect(() => {
+		const item = { itemId, itemCount };
+		updateCart(item);
+		if (itemCount >= 1) {
+			setIsInCart(true);
 		} else {
 			setIsInCart(false);
 		}
-	};
+	}, [itemCount]);
+
+	/*useEffect(() => {
+		const item = { title, itemCount };
+		if (isInCart) {
+			addItemToCart(item);
+		} else {
+			removeItemFromCart(item);
+		}
+	}, [isInCart]);*/
+
+	/*useEffect(() => {
+		//let localCount = getLocalStorage().filter((i) => i.title === title).itemCount;
+		let localCount = getLocalStorage().map((i) => {
+			if (i.title === title) {
+				return i.itemCount;
+			}
+		});
+		if (localCount >= 1) {
+			setItemCount(localCount);
+			setIsInCart(true);
+		}
+	}, []);*/
 
 	return (
 		<div className="overflow-hidden bg-gray-100 rounded-2xl [&>div>img]:hover:scale-110 flex select-none">
