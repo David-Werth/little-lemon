@@ -71,28 +71,6 @@ const MenuItem = ({
 		}
 	}, [itemCount]);
 
-	/*useEffect(() => {
-		const item = { title, itemCount };
-		if (isInCart) {
-			addItemToCart(item);
-		} else {
-			removeItemFromCart(item);
-		}
-	}, [isInCart]);*/
-
-	/*useEffect(() => {
-		//let localCount = getLocalStorage().filter((i) => i.title === title).itemCount;
-		let localCount = getLocalStorage().map((i) => {
-			if (i.title === title) {
-				return i.itemCount;
-			}
-		});
-		if (localCount >= 1) {
-			setItemCount(localCount);
-			setIsInCart(true);
-		}
-	}, []);*/
-
 	return (
 		<div className="overflow-hidden bg-gray-100 rounded-2xl [&>div>img]:hover:scale-110 flex select-none">
 			<div className="flex flex-col justify-between w-2/3 gap-3 p-4 text-green font-karla">

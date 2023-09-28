@@ -5,6 +5,7 @@ import './globals.css';
 
 import { Karla } from 'next/font/google';
 import { Markazi_Text } from 'next/font/google';
+import FloatingCartIcon from '@/components/FloatingCartIcon';
 
 const karla = Karla({ variable: '--font-karla', subsets: ['latin'] });
 const markazi = Markazi_Text({
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
 					{children}
 				</main>
 				<Footer />
+				{/* <FloatingCartIcon /> */}
 			</body>
 		</html>
 	);

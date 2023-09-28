@@ -4,7 +4,7 @@ import MenuItem from '@/components/MenuItem';
 import MenuNav from '@/components/MenuNav';
 import getLocalStorage from '@/utils/getLocalStorage';
 import updateLocalStorage from '@/utils/updateLocalStorage';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import {
 	mockMenuStarters,
@@ -16,7 +16,6 @@ import {
 const getInitState = () => {
 	let initCart = [];
 	let localCart = getLocalStorage();
-	console.log(localCart);
 	return localCart ? localCart : initCart;
 };
 
@@ -48,7 +47,6 @@ const Page = () => {
 			}
 		});
 		if (!exists) {
-			console.log('not exist');
 			setCartState(newCartState);
 			updateLocalStorage(cartState);
 		}
@@ -59,16 +57,6 @@ const Page = () => {
 		setCartState(newCartState);
 		updateLocalStorage(cartState);
 	};
-
-	/*useEffect(() => {
-		updateLocalStorage(cartState);
-		console.log('uploaded state', cartState);
-	}, [cartState]);*/
-
-	/*useEffect(() => {
-		let data = getLocalStorage();
-		setCartState(data);
-	}, []);*/
 
 	return (
 		<section className="flex flex-col items-center w-full">
