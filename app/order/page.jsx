@@ -103,8 +103,8 @@ const Page = () => {
 						})}
 					</div>
 				</div>
-				<div className="py-12" id="deserts">
-					<h2 className="mb-4 text-4xl font-karla text-green">Deserts</h2>
+				<div className="py-12" id="desserts">
+					<h2 className="mb-4 text-4xl font-karla text-green">Desserts</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
 						{mockMenuDesserts.map((i) => {
 							return (
