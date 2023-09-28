@@ -6,6 +6,13 @@ import getLocalStorage from '@/utils/getLocalStorage';
 import updateLocalStorage from '@/utils/updateLocalStorage';
 import { useEffect, useState } from 'react';
 
+import {
+	mockMenuStarters,
+	mockMenuMains,
+	mockMenuDesserts,
+	mockMenuDrinks,
+} from '@/mock/mockMenu';
+
 const getInitState = () => {
 	let initCart = [];
 	let localCart = getLocalStorage();
@@ -73,44 +80,78 @@ const Page = () => {
 				<div className="py-12" id="starters">
 					<h2 className="mb-4 text-4xl font-karla text-green">Starters</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-						<MenuItem
-							itemId={0}
-							cartState={cartState}
-							updateCart={updateCart}
-							addItemToCart={addItemToCart}
-							removeItemFromCart={removeItemFromCart}
-							title={'Lemon Dessert'}
-							price={'$4.99'}
-							description={
-								"This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined."
-							}
-						/>
+						{mockMenuStarters.map((i) => {
+							return (
+								<MenuItem
+									updateCart={updateCart}
+									addItemToCart={addItemToCart}
+									removeItemFromCart={removeItemFromCart}
+									key={i.itemId}
+									itemId={i.itemId}
+									title={i.title}
+									price={i.price}
+									description={i.description}
+								/>
+							);
+						})}
 					</div>
 				</div>
 				<div className="py-12" id="mains">
 					<h2 className="mb-4 text-4xl font-karla text-green">Mains</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-						<MenuItem
-							itemId={1}
-							cartState={cartState}
-							updateCart={updateCart}
-							addItemToCart={addItemToCart}
-							removeItemFromCart={removeItemFromCart}
-							title={'Lemon Dessert'}
-							price={'$4.99'}
-							description={
-								"This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined."
-							}
-						/>
+						{mockMenuMains.map((i) => {
+							return (
+								<MenuItem
+									updateCart={updateCart}
+									addItemToCart={addItemToCart}
+									removeItemFromCart={removeItemFromCart}
+									key={i.itemId}
+									itemId={i.itemId}
+									title={i.title}
+									price={i.price}
+									description={i.description}
+								/>
+							);
+						})}
 					</div>
 				</div>
 				<div className="py-12" id="deserts">
 					<h2 className="mb-4 text-4xl font-karla text-green">Deserts</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-7"></div>
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+						{mockMenuDesserts.map((i) => {
+							return (
+								<MenuItem
+									updateCart={updateCart}
+									addItemToCart={addItemToCart}
+									removeItemFromCart={removeItemFromCart}
+									key={i.itemId}
+									itemId={i.itemId}
+									title={i.title}
+									price={i.price}
+									description={i.description}
+								/>
+							);
+						})}
+					</div>
 				</div>
 				<div className="py-12" id="drinks">
 					<h2 className="mb-4 text-4xl font-karla text-green">Drinks</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-7"></div>
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+						{mockMenuDrinks.map((i) => {
+							return (
+								<MenuItem
+									updateCart={updateCart}
+									addItemToCart={addItemToCart}
+									removeItemFromCart={removeItemFromCart}
+									key={i.itemId}
+									itemId={i.itemId}
+									title={i.title}
+									price={i.price}
+									description={i.description}
+								/>
+							);
+						})}
+					</div>
 				</div>
 			</div>
 		</section>

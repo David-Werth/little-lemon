@@ -98,7 +98,7 @@ const MenuItem = ({
 			<div className="flex flex-col justify-between w-2/3 gap-3 p-4 text-green font-karla">
 				<div className="flex items-center justify-between text-lg font-bold">
 					<h4>{title}</h4>
-					<span className="text-base text-orange-500">{price}</span>
+					<span className="text-base text-orange-500">${price}</span>
 				</div>
 				<p>{description}</p>
 				{!isInCart ? (
