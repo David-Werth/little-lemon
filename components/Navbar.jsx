@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
 import logo from '../public/logo.png';
@@ -71,6 +71,13 @@ const Navbar = () => {
 				</Link>
 				<Link onClick={() => setClicked(false)} className="nav-link" href="login">
 					LOGIN
+				</Link>
+				<Link
+					onClick={() => setClicked(false)}
+					className="nav-link"
+					href="/order/cart"
+				>
+					<FontAwesomeIcon icon={faCartShopping} className={`h-6`} />
 				</Link>
 			</ul>
 		</nav>
