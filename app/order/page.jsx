@@ -56,7 +56,7 @@ const Page = () => {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:5555/menu-items')
+			.get('https://little-lemon-backend.vercel.app/menu-items')
 			.then((res) => {
 				setMenuItems(res.data);
 			})
