@@ -4,14 +4,9 @@ import MenuItem from '@/components/MenuItem';
 import MenuNav from '@/components/MenuNav';
 import getLocalStorage from '@/utils/getLocalStorage';
 import updateLocalStorage from '@/utils/updateLocalStorage';
-import { useState } from 'react';
 
-import {
-	mockMenuStarters,
-	mockMenuMains,
-	mockMenuDesserts,
-	mockMenuDrinks,
-} from '@/mock/mockMenu';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const getInitState = () => {
 	let initCart = [];
@@ -21,6 +16,7 @@ const getInitState = () => {
 
 const Page = () => {
 	const [cartState, setCartState] = useState(getInitState);
+	const [menuItems, setMenuItems] = useState([]);
 
 	const updateCart = (updatedItem) => {
 		// checking if item exists and updating count
@@ -58,6 +54,17 @@ const Page = () => {
 		updateLocalStorage(cartState);
 	};
 
+	useEffect(() => {
+		axios
+			.get('http://localhost:5555/menu-items')
+			.then((res) => {
+				setMenuItems(res.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
+
 	return (
 		<section className="flex flex-col items-center w-full">
 			<h1 className="w-full px-4 py-6 text-6xl font-normal text-center text-white font-markazi bg-green">
@@ -68,76 +75,88 @@ const Page = () => {
 				<div className="py-12" id="starters">
 					<h2 className="mb-4 text-4xl font-karla text-green">Starters</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-						{mockMenuStarters.map((i) => {
-							return (
-								<MenuItem
-									updateCart={updateCart}
-									addItemToCart={addItemToCart}
-									removeItemFromCart={removeItemFromCart}
-									key={i.itemId}
-									itemId={i.itemId}
-									title={i.title}
-									price={i.price}
-									description={i.description}
-								/>
-							);
+						{menuItems.map((i) => {
+							if (i.category === 'starters') {
+								return (
+									<MenuItem
+										updateCart={updateCart}
+										addItemToCart={addItemToCart}
+										removeItemFromCart={removeItemFromCart}
+										key={i._id}
+										itemId={i._id}
+										title={i.title}
+										price={i.price}
+										description={i.description}
+										img={i.img}
+									/>
+								);
+							}
 						})}
 					</div>
 				</div>
 				<div className="py-12" id="mains">
 					<h2 className="mb-4 text-4xl font-karla text-green">Mains</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-						{mockMenuMains.map((i) => {
-							return (
-								<MenuItem
-									updateCart={updateCart}
-									addItemToCart={addItemToCart}
-									removeItemFromCart={removeItemFromCart}
-									key={i.itemId}
-									itemId={i.itemId}
-									title={i.title}
-									price={i.price}
-									description={i.description}
-								/>
-							);
+						{menuItems.map((i) => {
+							if (i.category === 'mains') {
+								return (
+									<MenuItem
+										updateCart={updateCart}
+										addItemToCart={addItemToCart}
+										removeItemFromCart={removeItemFromCart}
+										key={i._id}
+										itemId={i._id}
+										title={i.title}
+										price={i.price}
+										description={i.description}
+										img={i.img}
+									/>
+								);
+							}
 						})}
 					</div>
 				</div>
 				<div className="py-12" id="desserts">
 					<h2 className="mb-4 text-4xl font-karla text-green">Desserts</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-						{mockMenuDesserts.map((i) => {
-							return (
-								<MenuItem
-									updateCart={updateCart}
-									addItemToCart={addItemToCart}
-									removeItemFromCart={removeItemFromCart}
-									key={i.itemId}
-									itemId={i.itemId}
-									title={i.title}
-									price={i.price}
-									description={i.description}
-								/>
-							);
+						{menuItems.map((i) => {
+							if (i.category === 'desserts') {
+								return (
+									<MenuItem
+										updateCart={updateCart}
+										addItemToCart={addItemToCart}
+										removeItemFromCart={removeItemFromCart}
+										key={i._id}
+										itemId={i._id}
+										title={i.title}
+										price={i.price}
+										description={i.description}
+										img={i.img}
+									/>
+								);
+							}
 						})}
 					</div>
 				</div>
 				<div className="py-12" id="drinks">
 					<h2 className="mb-4 text-4xl font-karla text-green">Drinks</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-						{mockMenuDrinks.map((i) => {
-							return (
-								<MenuItem
-									updateCart={updateCart}
-									addItemToCart={addItemToCart}
-									removeItemFromCart={removeItemFromCart}
-									key={i.itemId}
-									itemId={i.itemId}
-									title={i.title}
-									price={i.price}
-									description={i.description}
-								/>
-							);
+						{menuItems.map((i) => {
+							if (i.category === 'drinks') {
+								return (
+									<MenuItem
+										updateCart={updateCart}
+										addItemToCart={addItemToCart}
+										removeItemFromCart={removeItemFromCart}
+										key={i._id}
+										itemId={i._id}
+										title={i.title}
+										price={i.price}
+										description={i.description}
+										img={i.img}
+									/>
+								);
+							}
 						})}
 					</div>
 				</div>

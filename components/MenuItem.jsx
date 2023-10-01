@@ -6,7 +6,6 @@ import {
 	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import img from '../public/special3.jpg';
 import getLocalStorage from '@/utils/getLocalStorage';
 
 const getInitCount = (itemId) => {
@@ -27,6 +26,7 @@ const MenuItem = ({
 	title,
 	price,
 	description,
+	img,
 	updateCart,
 	addItemToCart,
 	removeItemFromCart,
@@ -72,7 +72,7 @@ const MenuItem = ({
 	}, [itemCount]);
 
 	return (
-		<div className="overflow-hidden bg-gray-100 rounded-2xl [&>div>img]:hover:scale-110 flex select-none">
+		<div className="overflow-hidden bg-gray-100 rounded-2xl [&>div>img]:hover:scale-110 flex select-none h-52">
 			<div className="flex flex-col justify-between w-2/3 gap-3 p-4 text-green font-karla">
 				<div className="flex items-center justify-between text-lg font-bold">
 					<h4>{title}</h4>
@@ -107,7 +107,9 @@ const MenuItem = ({
 				<Image
 					src={img}
 					alt={title}
-					className="object-cover w-full h-full transition-all bg-green"
+					width={500}
+					height={200}
+					className="object-cover h-full transition-all bg-green"
 				/>
 			</div>
 		</div>
