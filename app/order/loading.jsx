@@ -1,7 +1,7 @@
 import MenuItemSkeleton from '@/components/order/MenuItemSkeleton';
 import MenuNav from '@/components/order/MenuNav';
 
-const Loading = () => {
+const loading = () => {
 	return (
 		<section className="flex flex-col items-center w-full">
 			<h1 className="w-full px-4 py-6 text-6xl font-normal text-center text-white font-markazi bg-green">
@@ -50,4 +50,4 @@ const Loading = () => {
 	);
 };
 
-export default Loading;
+export default loading;
