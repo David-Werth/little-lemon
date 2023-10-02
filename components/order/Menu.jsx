@@ -20,7 +20,6 @@ const getMenuItems = async () => {
 
 const Menu = (updateCart, addItemToCart, removeItemFromCart) => {
 	const [menuItems, setMenuItems] = useState([]);
-	console.log(menuItems);
 
 	useEffect(() => {
 		(async () => {
