@@ -1,5 +1,6 @@
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Header from '@/components/shared/Header';
+import Footer from '@/components/shared/Footer';
+import ScrollToTop from '@/components/shared/ScrollToTop';
 
 import './globals.css';
 
@@ -19,11 +20,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
-			<body className={`${karla.variable} ${markazi.variable}`}>
+		<html lang="en" className="h-full">
+			<body
+				className={`${karla.variable} ${markazi.variable} flex flex-col justify-between h-full`}
+			>
 				<Header />
 				<main className="app top-[86.14px] relative z-0 mb-[86.14px]">
 					{children}
+					<ScrollToTop />
 				</main>
 				<Footer />
 			</body>

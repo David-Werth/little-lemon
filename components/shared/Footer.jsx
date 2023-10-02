@@ -5,9 +5,8 @@ import {
 	faEnvelope,
 	faLocationDot,
 	faPhone,
-	fas,
 } from '@fortawesome/free-solid-svg-icons';
-import logo from '../public/logowhite.png';
+import logowhite from '../../public/logowhite.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -21,7 +20,7 @@ const Footer = () => {
 	return (
 		<footer className="flex justify-center w-full py-8 mt-auto text-white bg-green font-karla">
 			<div className="grid w-11/12 max-w-5xl gap-10 sm:grid-cols-2 md:grid-cols-none md:grid-flow-col justify-items-stretch">
-				<Image src={logo} alt="logo" className="w-24" />
+				<Image src={logowhite} alt="logo" className="w-24" />
 				<nav>
 					<h4 className="mb-2 font-bold tracking-widest">SITEMAP</h4>
 					<ul className="flex flex-col">

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
-import logo from '../public/logo.png';
+import logo from '../../public/logo.png';
 import { useEffect, useState } from 'react';
 
 const Navbar = () => {
