@@ -1,6 +1,5 @@
 'use client';
 
-import Menu from '@/components/order/Menu';
 import getLocalStorage from '@/utils/getLocalStorage';
 import updateLocalStorage from '@/utils/updateLocalStorage';
 
@@ -15,7 +14,6 @@ const getInitState = () => {
 };
 
 const getMenuItems = async () => {
-	console.log('getting');
 	try {
 		const res = await fetch('/api/menu-items', {
 			cache: 'no-store',
@@ -90,7 +88,7 @@ const Page = () => {
 				<MenuNav />
 				<div className="py-12" id="starters">
 					<h2 className="mb-4 text-4xl font-karla text-green">Starters</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-7 auto-rows-fr">
 						{menuItems.map((i) => {
 							if (i.category === 'starters') {
 								return (
@@ -112,7 +110,7 @@ const Page = () => {
 				</div>
 				<div className="py-12" id="mains">
 					<h2 className="mb-4 text-4xl font-karla text-green">Mains</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-7 auto-rows-fr">
 						{menuItems.map((i) => {
 							if (i.category === 'mains') {
 								return (
@@ -134,7 +132,7 @@ const Page = () => {
 				</div>
 				<div className="py-12" id="desserts">
 					<h2 className="mb-4 text-4xl font-karla text-green">Desserts</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-7 auto-rows-fr">
 						{menuItems.map((i) => {
 							if (i.category === 'desserts') {
 								return (
@@ -156,7 +154,7 @@ const Page = () => {
 				</div>
 				<div className="py-12" id="drinks">
 					<h2 className="mb-4 text-4xl font-karla text-green">Drinks</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-7 auto-rows-fr">
 						{menuItems.map((i) => {
 							if (i.category === 'drinks') {
 								return (
