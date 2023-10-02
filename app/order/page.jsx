@@ -1,12 +1,12 @@
 'use client';
 
-import MenuItem from '@/components/MenuItem';
-import MenuNav from '@/components/MenuNav';
+import Menu from '@/components/order/Menu';
 import getLocalStorage from '@/utils/getLocalStorage';
 import updateLocalStorage from '@/utils/updateLocalStorage';
 
+import MenuItem from '@/components/order/MenuItem';
+import MenuNav from '@/components/order/MenuNav';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 const getInitState = () => {
 	let initCart = [];
@@ -14,9 +14,36 @@ const getInitState = () => {
 	return localCart ? localCart : initCart;
 };
 
+const getMenuItems = async () => {
+	console.log('getting');
+	try {
+		const res = await fetch('/api/menu-items', {
+			cache: 'no-store',
+		});
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch menu items');
+		}
+		return res.json();
+	} catch (error) {
+		console.log('Error loading menu items:', error);
+	}
+};
+
 const Page = () => {
 	const [cartState, setCartState] = useState(getInitState);
 	const [menuItems, setMenuItems] = useState([]);
+
+	useEffect(() => {
+		(async () => {
+			const { menuItems } = await getMenuItems();
+			setMenuItems(menuItems);
+		})();
+
+		return () => {
+			// this now gets called when the component unmounts
+		};
+	}, []);
 
 	const updateCart = (updatedItem) => {
 		// checking if item exists and updating count
@@ -53,17 +80,6 @@ const Page = () => {
 		setCartState(newCartState);
 		updateLocalStorage(cartState);
 	};
-
-	useEffect(() => {
-		axios
-			.get('https://little-lemon-backend.vercel.app/menu-items')
-			.then((res) => {
-				setMenuItems(res.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
 
 	return (
 		<section className="flex flex-col items-center w-full">

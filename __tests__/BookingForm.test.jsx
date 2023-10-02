@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import BookingForm from '../components/BookingForm';
+import BookingForm from '../components/reservation/BookingForm';
 
 describe('Booking Form - Rendering', () => {
 	it('should have submit button', () => {

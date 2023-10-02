@@ -1,8 +1,8 @@
 'use client';
 
 import { fetchAPI, submitAPI } from '@/api/api';
-import BookingConfirmation from '@/components/BookingConfirmation';
-import BookingForm from '@/components/BookingForm';
+import BookingConfirmation from '@/components/reservation/BookingConfirmation';
+import BookingForm from '@/components/reservation/BookingForm';
 import { useReducer, useState } from 'react';
 
 const Page = () => {

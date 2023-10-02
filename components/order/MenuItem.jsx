@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -39,9 +41,11 @@ const MenuItem = ({
 		setItemCount(1);
 		const item = { itemId, itemCount };
 		addItemToCart(item);
+		console.log(item);
 	};
 
 	const handleIncrease = () => {
+		console.log('increasedCounts');
 		if (itemCount < 99) {
 			const increasedCount = parseInt(itemCount) + 1;
 			setItemCount(increasedCount);
