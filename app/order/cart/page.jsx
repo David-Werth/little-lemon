@@ -1,4 +1,3 @@
-import UnderConstruction from '@/components/UnderConstruction';
 import OrderSummary from '@/components/order/cart/OrderSummary';
 import ShoppingCart from '@/components/order/cart/ShoppingCart';
 
