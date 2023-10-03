@@ -1,17 +1,9 @@
 'use client';
 
-import getLocalStorage from '@/utils/getLocalStorage';
-import updateLocalStorage from '@/utils/updateLocalStorage';
-
 import MenuItem from '@/components/order/MenuItem';
 import MenuNav from '@/components/order/MenuNav';
-import { useEffect, useState } from 'react';
-
-const getInitState = () => {
-	let initCart = [];
-	let localCart = getLocalStorage();
-	return localCart ? localCart : initCart;
-};
+import { LocalStorageContext } from '@/context/LocalStorageContext';
+import { useContext, useEffect, useState } from 'react';
 
 const getMenuItems = async () => {
 	try {
@@ -29,8 +21,9 @@ const getMenuItems = async () => {
 };
 
 const Page = () => {
-	const [cartState, setCartState] = useState(getInitState);
 	const [menuItems, setMenuItems] = useState([]);
+	const { addItemToCart, removeItemFromCart, updateCart } =
+		useContext(LocalStorageContext);
 
 	useEffect(() => {
 		(async () => {
@@ -42,42 +35,6 @@ const Page = () => {
 			// this now gets called when the component unmounts
 		};
 	}, []);
-
-	const updateCart = (updatedItem) => {
-		// checking if item exists and updating count
-		const newCartState = cartState.map((i) => {
-			if (i.itemId === updatedItem.itemId) {
-				return updatedItem;
-			} else {
-				return i;
-			}
-		});
-		setCartState(newCartState);
-		updateLocalStorage(newCartState);
-	};
-
-	const addItemToCart = (item) => {
-		const newCartState = [...cartState, item];
-		let exists = false;
-
-		//checking if item exists
-		cartState.map((i) => {
-			if (i.itemId === item.itemId) {
-				exists = true;
-				return;
-			}
-		});
-		if (!exists) {
-			setCartState(newCartState);
-			updateLocalStorage(cartState);
-		}
-	};
-
-	const removeItemFromCart = (item) => {
-		let newCartState = cartState.filter((i) => i.itemId !== item.itemId);
-		setCartState(newCartState);
-		updateLocalStorage(cartState);
-	};
 
 	return (
 		<section className="flex flex-col items-center w-full">

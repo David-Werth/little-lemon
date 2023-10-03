@@ -2,11 +2,7 @@
 
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-	faCartShopping,
-	faMinus,
-	faPlus,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import getLocalStorage from '@/utils/getLocalStorage';
 
