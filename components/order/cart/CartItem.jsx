@@ -76,11 +76,11 @@ const CartItem = ({
 					alt={title}
 					width={500}
 					height={500}
-					className="object-cover w-16 h-16 bg-green"
+					className="flex-none object-cover w-16 h-full bg-green"
 				/>
 				<h4>{title}</h4>
 			</div>
-			<div className="flex items-center gap-7">
+			<div className="flex items-center gap-2 md:gap-7">
 				<FontAwesomeIcon
 					icon={faMinus}
 					onClick={handleDecrease}
@@ -94,7 +94,7 @@ const CartItem = ({
 				/>
 			</div>
 			<span className="self-center text-base text-orange-500">
-				${Math.round((itemCount * price + Number.EPSILON) * 100)}
+				${(price * itemCount).toFixed(2)}
 			</span>
 		</div>
 	);

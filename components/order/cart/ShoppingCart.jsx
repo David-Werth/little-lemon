@@ -52,7 +52,7 @@ const ShoppingCart = () => {
 				<h3>Quantity</h3>
 				<h3>Total</h3>
 			</div>
-			<div className="grid gap-2">
+			<div className="grid gap-2 auto-rows-fr">
 				{menuItems.map((i) => {
 					return (
 						<CartItem
