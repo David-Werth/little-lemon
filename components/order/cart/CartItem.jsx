@@ -74,44 +74,35 @@ const CartItem = ({
 	}, [itemCount]);
 
 	return (
-		<div className="overflow-hidden bg-gray-100 rounded-2xl [&>div>img]:hover:scale-110 select-none flex max-h-fit">
-			<div className="flex flex-col justify-between w-2/3 gap-3 p-4 text-green font-karla">
-				<div className="flex justify-between text-lg font-bold">
+		<div className="grid grid-cols-4 gap-3 overflow-hidden font-bold bg-gray-100 select-none rounded-2xl text-green font-karla">
+			<div className="flex items-center col-span-2 gap-2">
+				<Image
+					src={img}
+					alt={title}
+					width={500}
+					height={500}
+					className="object-cover w-16 h-16 bg-green"
+				/>
+				<div>
 					<h4>{title}</h4>
-					<span className="text-base text-orange-500">${price}</span>
 				</div>
-				<p>{description}</p>
-				{!isInCart ? (
-					<span onClick={handleAdd} className="font-bold w-fit">
-						<p className="inline cursor-pointer">Add to cart</p>
-						<FontAwesomeIcon
-							icon={faCartShopping}
-							className="inline h-4 ml-3 cursor-pointer"
-						/>
-					</span>
-				) : (
-					<span className="flex items-center font-bold gap-7">
-						<FontAwesomeIcon
-							icon={faMinus}
-							onClick={handleDecrease}
-							className="cursor-pointer"
-						/>
-						<p>{itemCount}</p>
-						<FontAwesomeIcon
-							icon={faPlus}
-							onClick={handleIncrease}
-							className="cursor-pointer"
-						/>
-					</span>
-				)}
 			</div>
-			<Image
-				src={img}
-				alt={title}
-				width={500}
-				height={500}
-				className="object-cover w-1/3 h-full transition-all bg-green"
-			/>
+			<div className="flex items-center gap-7">
+				<FontAwesomeIcon
+					icon={faMinus}
+					onClick={handleDecrease}
+					className="cursor-pointer"
+				/>
+				<p>{itemCount}</p>
+				<FontAwesomeIcon
+					icon={faPlus}
+					onClick={handleIncrease}
+					className="cursor-pointer"
+				/>
+			</div>
+			<span className="self-center text-base text-orange-500">
+				${price * itemCount}
+			</span>
 		</div>
 	);
 };
