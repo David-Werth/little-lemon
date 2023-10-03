@@ -27,7 +27,6 @@ const CartItem = ({
 	itemId,
 	title,
 	price,
-	description,
 	img,
 	updateCart,
 	addItemToCart,
@@ -83,9 +82,7 @@ const CartItem = ({
 					height={500}
 					className="object-cover w-16 h-16 bg-green"
 				/>
-				<div>
-					<h4>{title}</h4>
-				</div>
+				<h4>{title}</h4>
 			</div>
 			<div className="flex items-center gap-7">
 				<FontAwesomeIcon
@@ -101,7 +98,7 @@ const CartItem = ({
 				/>
 			</div>
 			<span className="self-center text-base text-orange-500">
-				${price * itemCount}
+				${Math.round((itemCount * price + Number.EPSILON) * 100)}
 			</span>
 		</div>
 	);
