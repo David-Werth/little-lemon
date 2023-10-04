@@ -21,8 +21,7 @@ const getMenuItems = async () => {
 
 const ShoppingCart = () => {
 	const [menuItems, setMenuItems] = useState([]);
-	const { addItemToCart, removeItemFromCart, updateCart, cartState } =
-		useContext(LocalStorageContext);
+	const { cartState } = useContext(LocalStorageContext);
 
 	useEffect(() => {
 		(async () => {
@@ -40,9 +39,7 @@ const ShoppingCart = () => {
 			setMenuItems(filteredMenuItems);
 		})();
 
-		return () => {
-			// this now gets called when the component unmounts
-		};
+		return () => {};
 	}, [cartState]);
 
 	return (
@@ -56,9 +53,6 @@ const ShoppingCart = () => {
 				{menuItems.map((i) => {
 					return (
 						<CartItem
-							updateCart={updateCart}
-							addItemToCart={addItemToCart}
-							removeItemFromCart={removeItemFromCart}
 							key={i._id}
 							itemId={i._id}
 							title={i.title}

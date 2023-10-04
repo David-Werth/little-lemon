@@ -7,32 +7,12 @@ import {
 	faMinus,
 	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import getLocalStorage from '@/utils/getLocalStorage';
+import { useContext, useEffect, useState } from 'react';
+import { LocalStorageContext } from '@/context/LocalStorageContext';
 
-const getInitCount = (itemId) => {
-	if (getLocalStorage()) {
-		let localCount = 0;
-		getLocalStorage().map((i) => {
-			if (i.itemId === itemId) {
-				localCount = parseInt(i.itemCount);
-			}
-		});
-		return localCount;
-	}
-	return 0;
-};
-
-const MenuItem = ({
-	itemId,
-	title,
-	price,
-	description,
-	img,
-	updateCart,
-	addItemToCart,
-	removeItemFromCart,
-}) => {
+const MenuItem = ({ itemId, title, price, description, img }) => {
+	const { addItemToCart, removeItemFromCart, updateCart, getInitCount } =
+		useContext(LocalStorageContext);
 	const [isInCart, setIsInCart] = useState(false);
 	const [itemCount, setItemCount] = useState(getInitCount(itemId));
 	const [err, setErr] = useState(false);
@@ -110,6 +90,7 @@ const MenuItem = ({
 				alt={title}
 				width={500}
 				height={500}
+				priority={true}
 				className="object-cover w-1/3 h-full transition-all bg-green"
 			/>
 		</div>

@@ -3,30 +3,12 @@
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import getLocalStorage from '@/utils/getLocalStorage';
+import { useContext, useEffect, useState } from 'react';
+import { LocalStorageContext } from '@/context/LocalStorageContext';
 
-const getInitCount = (itemId) => {
-	if (getLocalStorage()) {
-		let localCount = 0;
-		getLocalStorage().map((i) => {
-			if (i.itemId === itemId) {
-				localCount = parseInt(i.itemCount);
-			}
-		});
-		return localCount;
-	}
-	return 0;
-};
-
-const CartItem = ({
-	itemId,
-	title,
-	price,
-	img,
-	updateCart,
-	removeItemFromCart,
-}) => {
+const CartItem = ({ itemId, title, price, img }) => {
+	const { removeItemFromCart, updateCart, getInitCount } =
+		useContext(LocalStorageContext);
 	const [itemCount, setItemCount] = useState(getInitCount(itemId));
 	const [err, setErr] = useState(false);
 
@@ -63,6 +45,7 @@ const CartItem = ({
 					alt={title}
 					width={500}
 					height={500}
+					priority={true}
 					className="flex-none object-cover w-16 h-full bg-green"
 				/>
 				<h4>{title}</h4>

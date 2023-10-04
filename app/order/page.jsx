@@ -2,8 +2,7 @@
 
 import MenuItem from '@/components/order/MenuItem';
 import MenuNav from '@/components/order/MenuNav';
-import { LocalStorageContext } from '@/context/LocalStorageContext';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const getMenuItems = async () => {
 	try {
@@ -22,8 +21,6 @@ const getMenuItems = async () => {
 
 const Page = () => {
 	const [menuItems, setMenuItems] = useState([]);
-	const { addItemToCart, removeItemFromCart, updateCart } =
-		useContext(LocalStorageContext);
 
 	useEffect(() => {
 		(async () => {
@@ -31,9 +28,7 @@ const Page = () => {
 			setMenuItems(menuItems);
 		})();
 
-		return () => {
-			// this now gets called when the component unmounts
-		};
+		return () => {};
 	}, []);
 
 	return (
@@ -50,9 +45,6 @@ const Page = () => {
 							if (i.category === 'starters') {
 								return (
 									<MenuItem
-										updateCart={updateCart}
-										addItemToCart={addItemToCart}
-										removeItemFromCart={removeItemFromCart}
 										key={i._id}
 										itemId={i._id}
 										title={i.title}
@@ -72,9 +64,6 @@ const Page = () => {
 							if (i.category === 'mains') {
 								return (
 									<MenuItem
-										updateCart={updateCart}
-										addItemToCart={addItemToCart}
-										removeItemFromCart={removeItemFromCart}
 										key={i._id}
 										itemId={i._id}
 										title={i.title}
@@ -94,9 +83,6 @@ const Page = () => {
 							if (i.category === 'desserts') {
 								return (
 									<MenuItem
-										updateCart={updateCart}
-										addItemToCart={addItemToCart}
-										removeItemFromCart={removeItemFromCart}
 										key={i._id}
 										itemId={i._id}
 										title={i.title}
@@ -116,9 +102,6 @@ const Page = () => {
 							if (i.category === 'drinks') {
 								return (
 									<MenuItem
-										updateCart={updateCart}
-										addItemToCart={addItemToCart}
-										removeItemFromCart={removeItemFromCart}
 										key={i._id}
 										itemId={i._id}
 										title={i.title}

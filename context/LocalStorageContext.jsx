@@ -12,6 +12,19 @@ const getInitState = () => {
 	return localCart ? localCart : initCart;
 };
 
+const getInitCount = (itemId) => {
+	if (getLocalStorage()) {
+		let localCount = 0;
+		getLocalStorage().map((i) => {
+			if (i.itemId === itemId) {
+				localCount = parseInt(i.itemCount);
+			}
+		});
+		return localCount;
+	}
+	return 0;
+};
+
 export const LocalStorageWrapper = ({ children }) => {
 	const [cartState, setCartState] = useState(getInitState);
 
@@ -53,7 +66,13 @@ export const LocalStorageWrapper = ({ children }) => {
 
 	return (
 		<LocalStorageContext.Provider
-			value={{ addItemToCart, removeItemFromCart, updateCart, cartState }}
+			value={{
+				addItemToCart,
+				removeItemFromCart,
+				updateCart,
+				cartState,
+				getInitCount,
+			}}
 		>
 			{children}
 		</LocalStorageContext.Provider>
