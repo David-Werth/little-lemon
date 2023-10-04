@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 const getMenuItems = async () => {
 	try {
 		const res = await fetch('/api/menu-items', {
-			cache: 'no-store',
+			// cache: 'no-store',
 		});
 
 		if (!res.ok) {

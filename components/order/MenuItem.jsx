@@ -74,7 +74,7 @@ const MenuItem = ({
 	}, [itemCount]);
 
 	return (
-		<div className="overflow-hidden bg-gray-100 rounded-2xl [&>div>img]:hover:scale-110 select-none flex max-h-fit">
+		<div className="overflow-hidden bg-gray-100 rounded-2xl [&>div>img]:hover:scale-110 select-none flex min-h-[241.61px]">
 			<div className="flex flex-col justify-between w-2/3 gap-3 p-4 text-green font-karla">
 				<div className="flex justify-between text-lg font-bold">
 					<h4>{title}</h4>

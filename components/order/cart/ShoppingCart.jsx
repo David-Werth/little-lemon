@@ -7,7 +7,7 @@ import { LocalStorageContext } from '@/context/LocalStorageContext';
 const getMenuItems = async () => {
 	try {
 		const res = await fetch('/api/menu-items', {
-			cache: 'no-store',
+			// cache: 'no-store',
 		});
 
 		if (!res.ok) {

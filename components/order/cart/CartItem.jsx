@@ -25,18 +25,10 @@ const CartItem = ({
 	price,
 	img,
 	updateCart,
-	addItemToCart,
 	removeItemFromCart,
 }) => {
-	const [isInCart, setIsInCart] = useState(false);
 	const [itemCount, setItemCount] = useState(getInitCount(itemId));
 	const [err, setErr] = useState(false);
-
-	const handleAdd = () => {
-		setItemCount(1);
-		const item = { itemId, itemCount };
-		addItemToCart(item);
-	};
 
 	const handleIncrease = () => {
 		if (itemCount < 99) {
@@ -61,15 +53,10 @@ const CartItem = ({
 	useEffect(() => {
 		const item = { itemId, itemCount };
 		updateCart(item);
-		if (itemCount >= 1) {
-			setIsInCart(true);
-		} else {
-			setIsInCart(false);
-		}
 	}, [itemCount]);
 
 	return (
-		<div className="grid grid-cols-4 gap-3 overflow-hidden font-bold bg-gray-100 select-none rounded-2xl text-green font-karla">
+		<div className="grid grid-cols-4 gap-3 overflow-hidden font-bold bg-gray-100 select-none rounded-2xl text-green font-karla min-h-[80px]">
 			<div className="flex items-center col-span-2 gap-2">
 				<Image
 					src={img}
