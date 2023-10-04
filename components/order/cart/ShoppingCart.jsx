@@ -3,6 +3,7 @@
 import { useContext, useEffect, useState } from 'react';
 import CartItem from './CartItem';
 import { LocalStorageContext } from '@/context/LocalStorageContext';
+import CardItemSkeleton from './CartItemSkeleton';
 
 const getMenuItems = async () => {
 	try {
@@ -22,11 +23,13 @@ const getMenuItems = async () => {
 const ShoppingCart = () => {
 	const [menuItems, setMenuItems] = useState([]);
 	const { cartState } = useContext(LocalStorageContext);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		(async () => {
 			const { menuItems } = await getMenuItems();
 			let filteredMenuItems = [];
+			setIsLoading(true);
 
 			menuItems.map((i) => {
 				cartState.map((j) => {
@@ -37,6 +40,7 @@ const ShoppingCart = () => {
 			});
 
 			setMenuItems(filteredMenuItems);
+			setIsLoading(false);
 		})();
 
 		return () => {};
@@ -50,17 +54,21 @@ const ShoppingCart = () => {
 				<h3>Total</h3>
 			</div>
 			<div className="grid gap-2 auto-rows-fr">
-				{menuItems.map((i) => {
-					return (
-						<CartItem
-							key={i._id}
-							itemId={i._id}
-							title={i.title}
-							price={i.price}
-							img={i.img}
-						/>
-					);
-				})}
+				{isLoading ? (
+					<CardItemSkeleton />
+				) : (
+					menuItems.map((i) => {
+						return (
+							<CartItem
+								key={i._id}
+								itemId={i._id}
+								title={i.title}
+								price={i.price}
+								img={i.img}
+							/>
+						);
+					})
+				)}
 			</div>
 		</div>
 	);
