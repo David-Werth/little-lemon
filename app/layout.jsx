@@ -25,14 +25,14 @@ export default function RootLayout({ children }) {
 			<body
 				className={`${karla.variable} ${markazi.variable} flex flex-col justify-between h-full`}
 			>
-				<Header />
 				<LocalStorageWrapper>
+					<Header />
 					<main className="app top-[86.14px] relative z-0 mb-[86.14px]">
 						{children}
 						<ScrollToTop />
 					</main>
+					<Footer />
 				</LocalStorageWrapper>
-				<Footer />
 			</body>
 		</html>
 	);

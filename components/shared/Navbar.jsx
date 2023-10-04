@@ -8,12 +8,15 @@ import { faBars, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
 import logo from '../../public/logo.png';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { LocalStorageContext } from '@/context/LocalStorageContext';
 
 const Navbar = () => {
 	const [windowDimension, setWindowDimension] = useState(null);
 	const [clicked, setClicked] = useState(false);
 	const isMobile = windowDimension <= 1024;
+	const [totalCartCount, setTotalCartCount] = useState(0);
+	const { cartState } = useContext(LocalStorageContext);
 
 	useEffect(() => {
 		setWindowDimension(window.innerWidth);
@@ -77,6 +80,7 @@ const Navbar = () => {
 					className="nav-link"
 					href="/order/cart"
 				>
+					{totalCartCount}
 					<FontAwesomeIcon icon={faCartShopping} className={`h-6`} />
 				</Link>
 			</ul>
