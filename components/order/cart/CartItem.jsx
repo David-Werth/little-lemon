@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useEffect, useState } from 'react';
 import { LocalStorageContext } from '@/context/LocalStorageContext';
 
@@ -32,14 +32,19 @@ const CartItem = ({ itemId, title, price, img }) => {
 		}
 	};
 
+	const handleDelete = () => {
+		const item = { itemId, itemCount };
+		removeItemFromCart(item);
+	};
+
 	useEffect(() => {
 		const item = { itemId, itemCount };
 		updateCart(item);
 	}, [itemCount]);
 
 	return (
-		<div className="grid grid-cols-4 gap-3 overflow-hidden font-bold bg-gray-100 select-none rounded-2xl text-green font-karla min-h-[80px]">
-			<div className="flex items-center col-span-2 gap-2">
+		<div className="grid grid-cols-4 gap-3 font-bold bg-gray-100 select-none rounded-2xl text-green font-karla min-h-[80px] relative">
+			<div className="flex items-center col-span-2 gap-2 overflow-hidden rounded-l-2xl">
 				<Image
 					src={img}
 					alt={title}
@@ -66,6 +71,12 @@ const CartItem = ({ itemId, title, price, img }) => {
 			<span className="self-center text-base text-orange-500">
 				${(price * itemCount).toFixed(2)}
 			</span>
+
+			<FontAwesomeIcon
+				icon={faTrashCan}
+				onClick={handleDelete}
+				className="absolute z-40 h-5 cursor-pointer -right-1 -top-2 hover:text-red-600"
+			/>
 		</div>
 	);
 };
