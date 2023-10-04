@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from 'react';
 import CartItem from './CartItem';
 import { LocalStorageContext } from '@/context/LocalStorageContext';
-import CardItemSkeleton from './CartItemSkeleton';
+import CartItemSkeleton from './CartItemSkeleton';
 
 const getMenuItems = async () => {
 	try {
@@ -55,7 +55,13 @@ const ShoppingCart = () => {
 			</div>
 			<div className="grid gap-2 auto-rows-fr">
 				{isLoading ? (
-					<CardItemSkeleton />
+					<>
+						<CartItemSkeleton />
+						<CartItemSkeleton />
+						<CartItemSkeleton />
+						<CartItemSkeleton />
+						<CartItemSkeleton />
+					</>
 				) : (
 					menuItems.map((i) => {
 						return (
