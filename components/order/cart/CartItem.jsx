@@ -33,6 +33,7 @@ const CartItem = ({ itemId, title, price, img }) => {
 	};
 
 	const handleDelete = () => {
+		setItemCount(0);
 		const item = { itemId, itemCount };
 		removeItemFromCart(item);
 	};
