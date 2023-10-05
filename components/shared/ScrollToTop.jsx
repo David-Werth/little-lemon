@@ -12,7 +12,7 @@ function scrollToTop() {
 
 const ScrollToTop = () => {
 	return (
-		<div className="fixed z-50 cursor-pointer md:bottom-12 md:right-12 bottom-4 right-4 just">
+		<div className="fixed z-50 cursor-pointer bottom-4 right-4">
 			<FontAwesomeIcon
 				icon={faArrowCircleUp}
 				onClick={scrollToTop}
