@@ -42,7 +42,7 @@ const CartItem = ({ itemId, title, price, img }) => {
 		setItemCount(e.target.value);
 	};
 
-	const handleInputBlur = (e) => {
+	const handleInputBlur = () => {
 		if (itemCount === '') {
 			setItemCount(0);
 		}

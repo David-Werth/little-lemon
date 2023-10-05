@@ -47,7 +47,7 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 		setItemCount(e.target.value);
 	};
 
-	const handleInputBlur = (e) => {
+	const handleInputBlur = () => {
 		if (itemCount === '') {
 			setItemCount(0);
 		}
