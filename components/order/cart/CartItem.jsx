@@ -56,8 +56,8 @@ const CartItem = ({ itemId, title, price, img }) => {
 	}, [itemCount]);
 
 	return (
-		<div className="grid grid-cols-4 gap-3 font-bold bg-gray-100 select-none rounded-2xl text-green font-karla min-h-[80px] relative">
-			<div className="flex items-center col-span-2 gap-2 overflow-hidden rounded-l-2xl">
+		<div className="grid grid-cols-4 gap-3 font-bold bg-gray-100 select-none rounded-md text-green font-karla min-h-[80px] relative">
+			<div className="flex items-center col-span-2 gap-2 overflow-hidden rounded-l-md">
 				<Image
 					src={img}
 					alt={title}

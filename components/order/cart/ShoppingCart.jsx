@@ -47,13 +47,13 @@ const ShoppingCart = () => {
 	}, [cartState]);
 
 	return (
-		<div className="w-full h-full pr-2 lg:w-2/3 lg:border-r border-green">
-			<div className="grid grid-cols-4 gap-3">
-				<h3 className="col-span-2">Product</h3>
+		<div className="w-full h-full min-h-full lg:pr-6 lg:w-2/3 lg:border-r border-green font-karla">
+			<div className="grid grid-cols-4 gap-3 text-xl">
+				<h3 className="col-span-2 ">Product</h3>
 				<h3>Quantity</h3>
 				<h3>Total</h3>
 			</div>
-			<div className="grid gap-2 auto-rows-fr">
+			<div className="grid gap-2 pt-2 auto-rows-fr">
 				{isLoading ? (
 					<>
 						<CartItemSkeleton />
