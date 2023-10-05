@@ -43,12 +43,24 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 		}
 	};
 
+	const handleInputChange = (e) => {
+		setItemCount(e.target.value);
+	};
+
+	const handleInputBlur = (e) => {
+		if (itemCount === '') {
+			setItemCount(0);
+		}
+		const item = { itemId, itemCount };
+		removeItemFromCart(item);
+	};
+
 	useEffect(() => {
 		const item = { itemId, itemCount };
 		updateCart(item);
 		if (itemCount >= 1) {
 			setIsInCart(true);
-		} else {
+		} else if (itemCount === 0) {
 			setIsInCart(false);
 		}
 	}, [itemCount]);
@@ -70,17 +82,25 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 						/>
 					</span>
 				) : (
-					<span className="flex items-center font-bold gap-7">
+					<span className="flex items-center font-bold">
 						<FontAwesomeIcon
 							icon={faMinus}
 							onClick={handleDecrease}
-							className="cursor-pointer"
+							className="pr-4 cursor-pointer"
 						/>
-						<p>{itemCount}</p>
+						<input
+							type="number"
+							value={itemCount}
+							onChange={handleInputChange}
+							onBlur={handleInputBlur}
+							min="0"
+							max="99"
+							className="max-w-[30px] text-center border-2 border-green rounded-lg"
+						></input>
 						<FontAwesomeIcon
 							icon={faPlus}
 							onClick={handleIncrease}
-							className="cursor-pointer"
+							className="pl-4 cursor-pointer"
 						/>
 					</span>
 				)}

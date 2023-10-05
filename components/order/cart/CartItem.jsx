@@ -38,6 +38,18 @@ const CartItem = ({ itemId, title, price, img }) => {
 		removeItemFromCart(item);
 	};
 
+	const handleInputChange = (e) => {
+		setItemCount(e.target.value);
+	};
+
+	const handleInputBlur = (e) => {
+		if (itemCount === '') {
+			setItemCount(0);
+		}
+		const item = { itemId, itemCount };
+		removeItemFromCart(item);
+	};
+
 	useEffect(() => {
 		const item = { itemId, itemCount };
 		updateCart(item);
@@ -62,7 +74,15 @@ const CartItem = ({ itemId, title, price, img }) => {
 					onClick={handleDecrease}
 					className="cursor-pointer"
 				/>
-				<p>{itemCount}</p>
+				<input
+					type="number"
+					value={itemCount}
+					onChange={handleInputChange}
+					onBlur={handleInputBlur}
+					min="0"
+					max="99"
+					className="max-w-[30px] text-center border-2 border-green rounded-lg"
+				></input>
 				<FontAwesomeIcon
 					icon={faPlus}
 					onClick={handleIncrease}
