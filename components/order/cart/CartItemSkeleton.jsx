@@ -5,8 +5,8 @@ const CartItemSkeleton = () => {
 				<div className="object-cover w-16 h-full bg-gray-200" />
 				<div className="w-24 h-6 bg-gray-200 rounded-lg " />
 			</div>
-			<div className="self-center w-24 h-6 bg-gray-200 rounded-lg" />
-			<div className="self-center w-24 h-6 bg-gray-200 rounded-lg" />
+			<div className="self-center w-16 h-6 bg-gray-200 rounded-lg md:w-24" />
+			<div className="self-center w-16 h-6 bg-gray-200 rounded-lg md:w-24" />
 		</div>
 	);
 };
