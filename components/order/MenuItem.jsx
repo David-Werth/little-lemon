@@ -111,7 +111,7 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 				width={500}
 				height={500}
 				priority={true}
-				className="object-cover w-1/3 h-full transition-all bg-green"
+				className="object-cover w-1/3 h-full transition-all bg-gray-200"
 			/>
 		</div>
 	);
