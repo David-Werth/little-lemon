@@ -54,14 +54,14 @@ export const LocalStorageWrapper = ({ children }) => {
 		});
 		if (!exists) {
 			setCartState(newCartState);
-			updateLocalStorage(cartState);
+			updateLocalStorage(newCartState);
 		}
 	};
 
 	const removeItemFromCart = (item) => {
 		let newCartState = cartState.filter((i) => i.itemId !== item.itemId);
 		setCartState(newCartState);
-		updateLocalStorage(cartState);
+		updateLocalStorage(newCartState);
 	};
 
 	return (

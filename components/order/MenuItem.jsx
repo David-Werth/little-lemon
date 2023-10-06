@@ -49,10 +49,10 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 
 	const handleInputBlur = () => {
 		if (itemCount === '') {
-			setItemCount(0);
+			const item = { itemId, itemCount };
+			removeItemFromCart(item);
+			setIsInCart(false);
 		}
-		const item = { itemId, itemCount };
-		removeItemFromCart(item);
 	};
 
 	useEffect(() => {

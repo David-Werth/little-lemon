@@ -33,7 +33,6 @@ const CartItem = ({ itemId, title, price, img }) => {
 	};
 
 	const handleDelete = () => {
-		setItemCount(0);
 		const item = { itemId, itemCount };
 		removeItemFromCart(item);
 	};
@@ -44,10 +43,9 @@ const CartItem = ({ itemId, title, price, img }) => {
 
 	const handleInputBlur = () => {
 		if (itemCount === '') {
-			setItemCount(0);
+			const item = { itemId, itemCount };
+			removeItemFromCart(item);
 		}
-		const item = { itemId, itemCount };
-		removeItemFromCart(item);
 	};
 
 	useEffect(() => {
@@ -96,7 +94,7 @@ const CartItem = ({ itemId, title, price, img }) => {
 			<FontAwesomeIcon
 				icon={faTrashCan}
 				onClick={handleDelete}
-				className="absolute z-40 h-5 cursor-pointer -right-1 -top-2 hover:text-red-600"
+				className="absolute z-40 h-5 transition-colors cursor-pointer -right-1 -top-2 hover:text-red-600"
 			/>
 		</div>
 	);
