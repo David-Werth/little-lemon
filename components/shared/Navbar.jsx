@@ -31,15 +31,24 @@ const Navbar = () => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
-	const handleClick = () => {
-		setClicked(() => !clicked);
-	};
-
 	useEffect(() => {
 		if (!isMobile) {
 			setClicked(false);
 		}
 	}, [isMobile]);
+
+	const handleClick = () => {
+		setClicked(() => !clicked);
+	};
+
+	useEffect(() => {
+		let counter = 0;
+		cartState.map((i) => {
+			counter = counter + i.itemCount;
+		});
+
+		setTotalCartCount(counter);
+	}, [cartState]);
 
 	return (
 		<nav className="flex flex-row items-center justify-between w-11/12 max-w-5xl bg-white ">
@@ -77,11 +86,13 @@ const Navbar = () => {
 				</Link>
 				<Link
 					onClick={() => setClicked(false)}
-					className="nav-link"
+					className="relative nav-link"
 					href="/order/cart"
 				>
-					{totalCartCount}
-					<FontAwesomeIcon icon={faCartShopping} className={`h-6`} />
+					<p className="absolute px-[6px] rounded-full bg-yellow top-[10px] lg:right-[10px] lg:top-[15px] text-sm">
+						{totalCartCount}
+					</p>
+					<FontAwesomeIcon icon={faCartShopping} className={`h-7`} />
 				</Link>
 			</ul>
 		</nav>
