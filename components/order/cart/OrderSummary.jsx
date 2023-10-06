@@ -37,7 +37,7 @@ const OrderSummary = () => {
 				});
 			});
 
-			setTotal(parseInt(totalSum.toFixed(2)));
+			setTotal(parseFloat(totalSum.toFixed(2)));
 		})();
 
 		return () => {
