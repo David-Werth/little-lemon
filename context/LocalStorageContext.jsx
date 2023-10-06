@@ -1,10 +1,20 @@
 'use client';
 
-import getLocalStorage from '@/utils/getLocalStorage';
-import updateLocalStorage from '@/utils/updateLocalStorage';
 import { createContext, useState } from 'react';
 
 export const LocalStorageContext = createContext();
+
+const getLocalStorage = () => {
+	if (typeof window !== 'undefined') {
+		let data = window.localStorage.getItem('USER_CART');
+		data = JSON.parse(data);
+		return data;
+	}
+};
+
+const updateLocalStorage = (state) => {
+	localStorage.setItem('USER_CART', JSON.stringify(state));
+};
 
 const getInitState = () => {
 	let initCart = [];
