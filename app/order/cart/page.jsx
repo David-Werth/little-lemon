@@ -32,23 +32,34 @@ const page = () => {
 			const { menuItems } = await getMenuItems();
 			let filteredMenuItems = [];
 			setIsLoading(true);
-			let totalSum = 0;
 
 			menuItems.map((i) => {
 				cartState.map((j) => {
 					if (i._id === j.itemId) {
 						filteredMenuItems = [...filteredMenuItems, i];
-						totalSum = totalSum + i.price * j.itemCount;
 					}
 				});
 			});
 
 			setMenuItems(filteredMenuItems);
 			setIsLoading(false);
-			setTotal(parseFloat(totalSum.toFixed(2)));
 		})();
 
 		return () => {};
+	}, [cartState]);
+
+	useEffect(() => {
+		let totalSum = 0;
+
+		menuItems.map((i) => {
+			cartState.map((j) => {
+				if (i._id === j.itemId) {
+					totalSum = totalSum + i.price * j.itemCount;
+				}
+			});
+		});
+
+		setTotal(parseFloat(totalSum.toFixed(2)));
 	}, [cartState]);
 
 	return (
