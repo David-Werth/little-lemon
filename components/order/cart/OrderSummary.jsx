@@ -1,49 +1,10 @@
 'use client';
 
-import { LocalStorageContext } from '@/context/LocalStorageContext';
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const getMenuItems = async () => {
-	try {
-		const res = await fetch('/api/menu-items', {
-			// cache: 'no-store',
-		});
-
-		if (!res.ok) {
-			throw new Error('Failed to fetch menu items');
-		}
-		return res.json();
-	} catch (error) {
-		console.log('Error loading menu items:', error);
-	}
-};
-
-const OrderSummary = () => {
-	const [total, setTotal] = useState(0);
+const OrderSummary = ({ total }) => {
 	const [coupon, setCoupon] = useState('');
-	const { cartState } = useContext(LocalStorageContext);
 	const deliveryFee = 2.99;
-
-	useEffect(() => {
-		(async () => {
-			const { menuItems } = await getMenuItems();
-			let totalSum = 0;
-
-			menuItems.map((i) => {
-				cartState.map((j) => {
-					if (i._id === j.itemId) {
-						totalSum = totalSum + i.price * j.itemCount;
-					}
-				});
-			});
-
-			setTotal(parseFloat(totalSum.toFixed(2)));
-		})();
-
-		return () => {
-			// this now gets called when the component unmounts
-		};
-	}, [cartState]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -70,9 +31,11 @@ const OrderSummary = () => {
 
 				<div>
 					<p>Your order: ${total}</p>
-					<p>Delivery fees: ${deliveryFee}</p>
+					<p>+ Delivery fees: ${deliveryFee}</p>
 					<div className="w-full h-[1px] bg-green mb-1"></div>
-					<p className="font-bold">Total: ${(total + deliveryFee).toFixed(2)}</p>
+					<p className="font-bold">
+						= Total: ${total ? (total + deliveryFee).toFixed(2) : 0}
+					</p>
 				</div>
 				<input
 					type="submit"
