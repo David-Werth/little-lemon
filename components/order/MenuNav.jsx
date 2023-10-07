@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const MenuNav = () => {
 	return (
-		<ul className="flex justify-end gap-3 pt-5 text-lg font-karla">
+		<ul className="flex justify-end gap-3 pt-5 text-lg font-karla text-green">
 			<Link href="#starters">Starters</Link>
 			<Link href="#mains">Mains</Link>
 			<Link href="#desserts">Desserts</Link>

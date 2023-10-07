@@ -89,7 +89,7 @@ const Navbar = () => {
 					className="relative nav-link"
 					href="/order/cart"
 				>
-					<p className="absolute px-[6px] rounded-full bg-yellow top-[10px] lg:right-[10px] lg:top-[15px] text-sm">
+					<p className="absolute w-[20px] right-[30px] text-center rounded-full bg-yellow top-[14px] lg:right-[10px] lg:top-[17px] text-sm">
 						{totalCartCount}
 					</p>
 					<FontAwesomeIcon icon={faCartShopping} className={`h-7`} />
