@@ -48,7 +48,7 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 	};
 
 	const handleInputBlur = () => {
-		if (itemCount === '') {
+		if (itemCount === '' || '0') {
 			const item = { itemId, itemCount };
 			removeItemFromCart(item);
 			setIsInCart(false);

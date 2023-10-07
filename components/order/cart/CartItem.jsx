@@ -45,7 +45,7 @@ const CartItem = ({ itemId, title, price, img }) => {
 	};
 
 	const handleInputBlur = () => {
-		if (itemCount === '') {
+		if (itemCount === '' || '0') {
 			const item = { itemId, itemCount };
 			setIsInCart(false);
 			removeItemFromCart(item);
