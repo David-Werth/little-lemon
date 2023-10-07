@@ -72,7 +72,7 @@ const CartItem = ({ itemId, title, price, img }) => {
 						/>
 						<h4>{title}</h4>
 					</div>
-					<div className="flex items-center gap-2 md:gap-7">
+					<div className="flex items-center gap-2 md:gap-4">
 						<FontAwesomeIcon
 							icon={faMinus}
 							onClick={handleDecrease}
@@ -85,7 +85,7 @@ const CartItem = ({ itemId, title, price, img }) => {
 							onBlur={handleInputBlur}
 							min="0"
 							max="99"
-							className="max-w-[30px] text-center border-2 border-green rounded-lg"
+							className="w-[30px] text-center border-2 border-green rounded-lg"
 						></input>
 						<FontAwesomeIcon
 							icon={faPlus}

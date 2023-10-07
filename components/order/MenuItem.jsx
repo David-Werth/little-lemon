@@ -82,11 +82,11 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 						/>
 					</span>
 				) : (
-					<span className="flex items-center font-bold">
+					<span className="flex items-center gap-4 font-bold">
 						<FontAwesomeIcon
 							icon={faMinus}
 							onClick={handleDecrease}
-							className="pr-4 cursor-pointer"
+							className="cursor-pointer"
 						/>
 						<input
 							type="number"
@@ -95,12 +95,12 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 							onBlur={handleInputBlur}
 							min="0"
 							max="99"
-							className="max-w-[30px] text-center border-2 border-green rounded-lg"
+							className="w-[30px] text-center border-2 border-green rounded-lg"
 						></input>
 						<FontAwesomeIcon
 							icon={faPlus}
 							onClick={handleIncrease}
-							className="pl-4 cursor-pointer"
+							className="cursor-pointer"
 						/>
 					</span>
 				)}
