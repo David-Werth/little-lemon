@@ -41,10 +41,12 @@ export default function Home() {
 					</div>
 					<Image
 						className="self-center object-cover w-full -mb-16 h-96 rounded-2xl md:flex-1"
-						width={500}
-						height={500}
+						width={700}
+						height={700}
 						src={hero}
 						alt="bruschtta"
+						priority
+						placeholder="blur"
 					/>
 				</div>
 			</section>
