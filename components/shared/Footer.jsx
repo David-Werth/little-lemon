@@ -25,7 +25,6 @@ const Footer = () => {
 					<h4 className="mb-2 font-bold tracking-widest">SITEMAP</h4>
 					<ul className="flex flex-col">
 						<Link href="/">Home</Link>
-						<Link href="/about">About</Link>
 						<Link href="/order">Order online</Link>
 						<Link href="/reservations">Reservations</Link>
 						<Link href="/login">Login</Link>
