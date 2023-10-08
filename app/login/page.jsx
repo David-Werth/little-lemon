@@ -1,4 +1,4 @@
-import UnderConstruction from '@/components/UnderConstruction';
+import UnderConstruction from '@/components/shared/UnderConstruction';
 
 const Page = () => {
 	return (

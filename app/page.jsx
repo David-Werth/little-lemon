@@ -14,8 +14,8 @@ import special1 from '../public/special1.jpg';
 import special2 from '../public/special2.jpg';
 import special3 from '../public/special3.jpg';
 
-import SpecialsCard from '@/components/SpecialsCard';
-import TestimonialCard from '@/components/TestimonialCard';
+import SpecialsCard from '@/components/main/SpecialsCard';
+import TestimonialCard from '@/components/main/TestimonialCard';
 
 export default function Home() {
 	return (
