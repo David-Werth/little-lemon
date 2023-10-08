@@ -1,10 +1,12 @@
 'use client';
 
 import { useContext, useEffect, useState } from 'react';
+
 import { LocalStorageContext } from '@/context/LocalStorageContext';
 
 import OrderSummary from '@/components/order/cart/OrderSummary';
 import ShoppingCart from '@/components/order/cart/ShoppingCart';
+import { TotalCartValueContext } from '@/context/TotalCartValueContext';
 
 const getMenuItems = async () => {
 	try {
@@ -22,10 +24,10 @@ const getMenuItems = async () => {
 };
 
 const page = () => {
-	const [menuItems, setMenuItems] = useState([]);
 	const { cartState } = useContext(LocalStorageContext);
+	const { total, setTotal } = useContext(TotalCartValueContext);
+	const [menuItems, setMenuItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [total, setTotal] = useState(0);
 
 	useEffect(() => {
 		(async () => {

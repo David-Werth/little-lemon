@@ -7,6 +7,7 @@ import './globals.css';
 import { Karla } from 'next/font/google';
 import { Markazi_Text } from 'next/font/google';
 import { LocalStorageWrapper } from '@/context/LocalStorageContext';
+import { TotalCartValueWrapper } from '@/context/TotalCartValueContext';
 
 const karla = Karla({ variable: '--font-karla', subsets: ['latin'] });
 const markazi = Markazi_Text({
@@ -26,12 +27,14 @@ export default function RootLayout({ children }) {
 				className={`${karla.variable} ${markazi.variable} flex flex-col justify-between h-full`}
 			>
 				<LocalStorageWrapper>
-					<Header />
-					<main className="app top-[86.14px] relative z-0 mb-[86.14px]">
-						{children}
-						<ScrollToTop />
-					</main>
-					<Footer />
+					<TotalCartValueWrapper>
+						<Header />
+						<main className="app top-[86.14px] relative z-0 mb-[86.14px]">
+							{children}
+							<ScrollToTop />
+						</main>
+						<Footer />
+					</TotalCartValueWrapper>
 				</LocalStorageWrapper>
 			</body>
 		</html>
