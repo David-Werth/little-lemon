@@ -11,8 +11,11 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 
 const page = () => {
-	const [coupon, setCoupon] = useState('');
 	const { total } = useContext(TotalCartValueContext);
+
+	const [coupon, setCoupon] = useState('');
+	const [isCouponValid, setIsCouponValid] = useState(false);
+	const couponValue = 5;
 
 	const [name, setName] = useState('');
 	const [street, setStreet] = useState('');
@@ -24,6 +27,14 @@ const page = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+	};
+
+	const handleCouponApply = () => {
+		if (coupon.toUpperCase() === 'ALL4FREE') {
+			setIsCouponValid(true);
+		} else {
+			setIsCouponValid(false);
+		}
 	};
 
 	return (
@@ -122,9 +133,15 @@ const page = () => {
 							</div>
 							<p>Subtotal: ${total}</p>
 							<p>+ Delivery fees: $2.99</p>
+							{isCouponValid && <p>- COUPON: ${couponValue}</p>}
 							<div className="w-full h-[1px] bg-green mb-1"></div>
 							<p className="font-bold">
-								= Total: ${total ? (total + 2.99).toFixed(2) : 0}
+								= Total: $
+								{total
+									? isCouponValid
+										? (total + 2.99 - couponValue).toFixed(2)
+										: (total + 2.99).toFixed(2)
+									: 0}
 							</p>
 							<div className="flex flex-col gap-1">
 								<label htmlFor="coupon">Got a coupon?</label>
@@ -143,6 +160,7 @@ const page = () => {
 										type="button"
 										value="apply"
 										className="flex-1 p-4 font-bold border rounded-md cursor-pointer border-green hover:bg-green hover:text-white"
+										onClick={handleCouponApply}
 									/>
 								</div>
 							</div>
