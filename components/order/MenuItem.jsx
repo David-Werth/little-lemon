@@ -44,14 +44,16 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 	};
 
 	const handleInputChange = (e) => {
-		setItemCount(e.target.value);
+		setItemCount(parseInt(e.target.value));
 	};
 
-	const handleInputBlur = () => {
-		if (itemCount === '' || '0') {
+	const handleInputBlur = (e) => {
+		if (e.target.value === '') {
 			const item = { itemId, itemCount };
 			removeItemFromCart(item);
 			setIsInCart(false);
+		} else {
+			setItemCount(parseInt(e.target.value));
 		}
 	};
 
@@ -62,6 +64,7 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 			setIsInCart(true);
 		} else if (itemCount === 0) {
 			setIsInCart(false);
+			removeItemFromCart(item);
 		}
 	}, [itemCount]);
 
@@ -93,8 +96,8 @@ const MenuItem = ({ itemId, title, price, description, img }) => {
 							value={itemCount}
 							onChange={handleInputChange}
 							onBlur={handleInputBlur}
-							min="0"
-							max="99"
+							min={0}
+							max={99}
 							className="w-[30px] text-center border-2 border-green rounded-lg"
 						></input>
 						<FontAwesomeIcon

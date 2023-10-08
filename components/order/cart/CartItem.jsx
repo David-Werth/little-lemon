@@ -41,20 +41,26 @@ const CartItem = ({ itemId, title, price, img }) => {
 	};
 
 	const handleInputChange = (e) => {
-		setItemCount(e.target.value);
+		setItemCount(parseInt(e.target.value));
 	};
 
-	const handleInputBlur = () => {
-		if (itemCount === '' || '0') {
+	const handleInputBlur = (e) => {
+		if (e.target.value === '') {
 			const item = { itemId, itemCount };
-			setIsInCart(false);
 			removeItemFromCart(item);
+			setIsInCart(false);
+		} else {
+			setItemCount(parseInt(e.target.value));
 		}
 	};
 
 	useEffect(() => {
 		const item = { itemId, itemCount };
 		updateCart(item);
+
+		if (itemCount === 0) {
+			removeItemFromCart(item);
+		}
 	}, [itemCount]);
 
 	return (
