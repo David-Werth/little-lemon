@@ -158,7 +158,7 @@ const page = () => {
 									/>
 									<input
 										type="button"
-										value="apply"
+										value="Apply"
 										className="flex-1 p-4 font-bold border rounded-md cursor-pointer border-green hover:bg-green hover:text-white"
 										onClick={handleCouponApply}
 									/>
