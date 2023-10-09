@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
 				<LocalStorageWrapper>
 					<TotalCartValueWrapper>
 						<Header />
-						<main className="app top-[86.14px] relative z-0 mb-[86.14px]">
+						<main className="app mt-[86.14px] z-0">
 							{children}
 							<ScrollToTop />
 						</main>

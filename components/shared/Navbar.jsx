@@ -78,9 +78,6 @@ const Navbar = () => {
 				>
 					RESERVATIONS
 				</Link>
-				<Link onClick={() => setClicked(false)} className="nav-link" href="/login">
-					LOGIN
-				</Link>
 				<Link
 					onClick={() => setClicked(false)}
 					className="relative nav-link"
