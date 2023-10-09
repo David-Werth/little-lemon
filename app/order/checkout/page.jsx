@@ -1,17 +1,21 @@
 'use client';
 
+import Link from 'next/link';
+import { useContext, useState } from 'react';
+
 import { TotalCartValueContext } from '@/context/TotalCartValueContext';
+
 import { faPaypal } from '@fortawesome/free-brands-svg-icons';
 import {
 	faCreditCard,
 	faMoneyBillWave,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { LocalStorageContext } from '@/context/LocalStorageContext';
 
 const page = () => {
 	const { total } = useContext(TotalCartValueContext);
+	const { setCartState, updateLocalStorage } = useContext(LocalStorageContext);
 
 	const [coupon, setCoupon] = useState('');
 	const [isCouponValid, setIsCouponValid] = useState(false);
@@ -25,16 +29,38 @@ const page = () => {
 
 	const [formData, setFormData] = useState({});
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-	};
-
 	const handleCouponApply = () => {
-		if (coupon.toUpperCase() === 'ALL4FREE') {
+		if (coupon.toUpperCase() === '5LESS') {
 			setIsCouponValid(true);
 		} else {
 			setIsCouponValid(false);
 		}
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setFormData({
+			name,
+			street,
+			additional,
+			city,
+			paymentMethod,
+			total: total
+				? isCouponValid
+					? (total + 2.99 - couponValue).toFixed(2)
+					: (total + 2.99).toFixed(2)
+				: 0,
+		});
+
+		setName('');
+		setStreet('');
+		setAdditional('');
+		setCity('');
+		setPaymentMethod('');
+		setCoupon('');
+		setIsCouponValid(false);
+		setCartState([]);
+		updateLocalStorage([]);
 	};
 
 	return (
@@ -150,7 +176,7 @@ const page = () => {
 										type="text"
 										name="coupon"
 										id="coupon"
-										placeholder="TRY: ALL4FREE"
+										placeholder="TRY: 5LESS"
 										className="p-4 font-bold border rounded-md border-green"
 										value={coupon.toUpperCase()}
 										onChange={(e) => setCoupon(e.target.value)}

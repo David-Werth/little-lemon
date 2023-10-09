@@ -82,6 +82,8 @@ export const LocalStorageWrapper = ({ children }) => {
 				updateCart,
 				cartState,
 				getInitCount,
+				setCartState,
+				updateLocalStorage,
 			}}
 		>
 			{children}
