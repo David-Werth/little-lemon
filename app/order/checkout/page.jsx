@@ -70,7 +70,25 @@ const page = () => {
 						: 0,
 				}}
 				validationSchema={deliveryDetailsSchema}
-				onSubmit={(values) => {
+				onSubmit={async (values) => {
+					await fetch('/api/orders', {
+						method: 'PUT',
+						body: JSON.stringify({
+							userDetails: {
+								name: values.name,
+								street: values.street,
+								additional: values.additional,
+								city: values.city,
+								phone: values.phone,
+							},
+							items: [
+								{ itemId: 'test1', itemCount: 2 },
+								{ itemId: 'test2', itemCount: 4 },
+							],
+							paymentMethod: values.paymentMethod,
+							total: values.total,
+						}),
+					});
 					setCartState([]);
 					updateLocalStorage([]);
 					router.push('/order/success');

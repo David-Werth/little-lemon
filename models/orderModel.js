@@ -6,6 +6,14 @@ const OrderSchema = mongoose.Schema({
 		required: true,
 	},
 	items: [{ itemId: String, itemCount: Number }],
+	paymentMethod: {
+		type: String,
+		required: true,
+	},
+	total: {
+		type: Number,
+		required: true,
+	},
 	date: { type: Date, default: Date.now },
 });
 
