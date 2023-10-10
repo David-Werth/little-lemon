@@ -6,7 +6,7 @@ const OrderSchema = mongoose.Schema({
 		required: true,
 	},
 	items: [{ itemId: String, itemCount: Number }],
-	date: new Date(),
+	date: { type: Date, default: Date.now },
 });
 
 export const Order =
