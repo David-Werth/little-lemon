@@ -72,7 +72,7 @@ const page = () => {
 				validationSchema={deliveryDetailsSchema}
 				onSubmit={async (values) => {
 					await fetch('/api/orders', {
-						method: 'PUT',
+						method: 'POST',
 						body: JSON.stringify({
 							userDetails: {
 								name: values.name,
@@ -89,6 +89,7 @@ const page = () => {
 							total: values.total,
 						}),
 					});
+
 					setCartState([]);
 					updateLocalStorage([]);
 					router.push('/order/success');
