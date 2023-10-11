@@ -28,13 +28,19 @@ const page = () => {
 
 	const [coupon, setCoupon] = useState('');
 	const [isCouponValid, setIsCouponValid] = useState(false);
-	const couponValue = 5;
+	const [couponValue, setCouponValue] = useState(0);
 
-	const handleCouponApply = () => {
-		if (coupon.toUpperCase() === '5LESS') {
+	const handleCouponApply = async () => {
+		try {
+			setIsLoading(true);
+			const res = await fetch(`/api/coupon-codes?code=${coupon.toUpperCase()}`);
+			const { coupons } = await res.json();
+			setCouponValue(coupons.value);
 			setIsCouponValid(true);
-		} else {
+			setIsLoading(false);
+		} catch (error) {
 			setIsCouponValid(false);
+			setIsLoading(false);
 		}
 	};
 
@@ -66,11 +72,9 @@ const page = () => {
 					city: '',
 					phone: '',
 					paymentMethod: '',
-					total: total
-						? isCouponValid
-							? (total + 2.99 - couponValue).toFixed(2)
-							: (total + 2.99).toFixed(2)
-						: 0,
+					total: isCouponValid
+						? (total + 2.99 - couponValue).toFixed(2)
+						: (total + 2.99).toFixed(2),
 				}}
 				validationSchema={deliveryDetailsSchema}
 				onSubmit={async (values) => {
@@ -110,7 +114,7 @@ const page = () => {
 								name="name"
 								id="name"
 								placeholder="John Doe"
-								autocomplete="off"
+								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="name" />
@@ -122,7 +126,7 @@ const page = () => {
 								name="street"
 								id="street"
 								placeholder="Main Street 10"
-								autocomplete="off"
+								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="street" />
@@ -134,7 +138,7 @@ const page = () => {
 								name="additional"
 								id="additional"
 								placeholder="Floor 1, Door 11"
-								autocomplete="off"
+								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="additional" />
@@ -146,7 +150,7 @@ const page = () => {
 								name="city"
 								id="city"
 								placeholder="Anytown"
-								autocomplete="off"
+								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="city" />
@@ -158,7 +162,7 @@ const page = () => {
 								name="phone"
 								id="phone"
 								placeholder="Your phone number"
-								autocomplete="off"
+								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="phone" />
@@ -232,12 +236,17 @@ const page = () => {
 											onChange={(e) => setCoupon(e.target.value)}
 											spellCheck={false}
 										/>
-										<input
+										<button
 											type="button"
-											value="Apply"
 											className="flex-1 p-4 font-bold border rounded-md cursor-pointer border-green hover:bg-green hover:text-white"
 											onClick={handleCouponApply}
-										/>
+										>
+											{isLoading ? (
+												<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
+											) : (
+												'Apply'
+											)}
+										</button>
 									</div>
 								</div>
 							</div>
