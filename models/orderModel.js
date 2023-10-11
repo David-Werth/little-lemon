@@ -5,7 +5,10 @@ const OrderSchema = mongoose.Schema({
 		type: Object,
 		required: true,
 	},
-	items: [{ itemId: String, itemCount: Number }],
+	cart: {
+		type: Object,
+		required: true,
+	},
 	paymentMethod: {
 		type: String,
 		required: true,

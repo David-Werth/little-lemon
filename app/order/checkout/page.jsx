@@ -10,6 +10,7 @@ import { faPaypal } from '@fortawesome/free-brands-svg-icons';
 import {
 	faCreditCard,
 	faMoneyBillWave,
+	faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LocalStorageContext } from '@/context/LocalStorageContext';
@@ -20,8 +21,10 @@ const page = () => {
 	const router = useRouter();
 
 	const { total } = useContext(TotalCartValueContext);
-	const { setCartState, updateLocalStorage } = useContext(LocalStorageContext);
+	const { cartState, setCartState, updateLocalStorage } =
+		useContext(LocalStorageContext);
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [coupon, setCoupon] = useState('');
 	const [isCouponValid, setIsCouponValid] = useState(false);
@@ -43,7 +46,7 @@ const page = () => {
 		phone: Yup.number('not number').required('Required'),
 		paymentMethod: Yup.string()
 			.required('Required')
-			.test('test', 'test', (value) => {
+			.test('', '', (value) => {
 				setSelectedPaymentMethod(value);
 				return true;
 			}),
@@ -71,26 +74,28 @@ const page = () => {
 				}}
 				validationSchema={deliveryDetailsSchema}
 				onSubmit={async (values) => {
-					await fetch('/api/orders', {
-						method: 'POST',
-						body: JSON.stringify({
-							userDetails: {
-								name: values.name,
-								street: values.street,
-								additional: values.additional,
-								city: values.city,
-								phone: values.phone,
-							},
-							items: [
-								{ itemId: 'test1', itemCount: 2 },
-								{ itemId: 'test2', itemCount: 4 },
-							],
-							paymentMethod: values.paymentMethod,
-							total: values.total,
-						}),
-					});
+					try {
+						setIsLoading(true),
+							await fetch('/api/orders', {
+								method: 'POST',
+								body: JSON.stringify({
+									userDetails: {
+										name: values.name,
+										street: values.street,
+										additional: values.additional,
+										city: values.city,
+										phone: values.phone,
+									},
+									cart: cartState,
+									paymentMethod: values.paymentMethod,
+									total: values.total,
+								}),
+							});
+					} catch (error) {
+						console.log(error);
+					}
 
-					setCartState([]);
+					setIsLoading(false), setCartState([]);
 					updateLocalStorage([]);
 					router.push('/order/success');
 				}}
@@ -105,6 +110,7 @@ const page = () => {
 								name="name"
 								id="name"
 								placeholder="John Doe"
+								autocomplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="name" />
@@ -116,6 +122,7 @@ const page = () => {
 								name="street"
 								id="street"
 								placeholder="Main Street 10"
+								autocomplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="street" />
@@ -127,6 +134,7 @@ const page = () => {
 								name="additional"
 								id="additional"
 								placeholder="Floor 1, Door 11"
+								autocomplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="additional" />
@@ -138,6 +146,7 @@ const page = () => {
 								name="city"
 								id="city"
 								placeholder="Anytown"
+								autocomplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="city" />
@@ -149,6 +158,7 @@ const page = () => {
 								name="phone"
 								id="phone"
 								placeholder="Your phone number"
+								autocomplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
 							<ErrorMessage name="phone" />
@@ -209,7 +219,7 @@ const page = () => {
 											: (total + 2.99).toFixed(2)
 										: 0}
 								</p>
-								{/* <div className="flex flex-col gap-1">
+								<div className="flex flex-col gap-1">
 									<label htmlFor="coupon">Got a coupon?</label>
 									<div className="flex gap-1">
 										<input
@@ -229,13 +239,17 @@ const page = () => {
 											onClick={handleCouponApply}
 										/>
 									</div>
-								</div> */}
+								</div>
 							</div>
 							<button
 								type="submit"
 								className="px-4 py-3 font-bold text-center transition-colors border-4 rounded-full cursor-pointer hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow text-green font-karla"
 							>
-								Order now!
+								{isLoading ? (
+									<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
+								) : (
+									'Order now!'
+								)}
 							</button>
 						</div>
 					</div>
