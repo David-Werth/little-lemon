@@ -70,31 +70,31 @@ const page = () => {
 					street: '',
 					additional: '',
 					city: '',
-					phone: 0,
+					phone: '',
 					paymentMethod: '',
 					total: 0,
 				}}
 				validationSchema={deliveryDetailsSchema}
 				onSubmit={async (values) => {
 					try {
-						setIsLoading(true),
-							await fetch('/api/orders', {
-								method: 'POST',
-								body: JSON.stringify({
-									userDetails: {
-										name: values.name,
-										street: values.street,
-										additional: values.additional,
-										city: values.city,
-										phone: values.phone,
-									},
-									cart: cartState,
-									paymentMethod: values.paymentMethod,
-									total: isCouponValid
-										? (total + 2.99 - couponValue).toFixed(2)
-										: (total + 2.99).toFixed(2),
-								}),
-							});
+						setIsLoading(true);
+						await fetch('/api/orders', {
+							method: 'POST',
+							body: JSON.stringify({
+								userDetails: {
+									name: values.name,
+									street: values.street,
+									additional: values.additional,
+									city: values.city,
+									phone: values.phone,
+								},
+								cart: cartState,
+								paymentMethod: values.paymentMethod,
+								total: isCouponValid
+									? (total + 2.99 - couponValue).toFixed(2)
+									: (total + 2.99).toFixed(2),
+							}),
+						});
 					} catch (error) {
 						console.log(error);
 					}
@@ -109,7 +109,7 @@ const page = () => {
 					<div className="flex flex-col w-full gap-4 lg:w-2/3 ">
 						<h3 className="text-xl">Delivery Address</h3>
 						<div className="flex flex-col gap-1">
-							<label htmlFor="name">Full Name</label>
+							<label htmlFor="name">Full name</label>
 							<Field
 								type="text"
 								name="name"
@@ -157,7 +157,7 @@ const page = () => {
 							<ErrorMessage name="city" />
 						</div>
 						<div className="flex flex-col gap-1">
-							<label htmlFor="phone">Number</label>
+							<label htmlFor="phone">Phone number</label>
 							<Field
 								type="number"
 								name="phone"
@@ -239,7 +239,7 @@ const page = () => {
 										/>
 										<button
 											type="button"
-											className="flex-1 p-4 font-bold border rounded-md cursor-pointer border-green hover:bg-green hover:text-white"
+											className="flex-1 p-4 font-bold transition-colors border rounded-md cursor-pointer border-green hover:bg-green hover:text-white"
 											onClick={handleCouponApply}
 										>
 											{isLoading ? (
