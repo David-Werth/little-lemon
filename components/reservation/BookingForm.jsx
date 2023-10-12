@@ -17,6 +17,7 @@ const reservationDetailSchema = Yup.object().shape({
 
 const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const [isLoading, setIsLoading] = useState(false);
+
 	return (
 		<Formik
 			initialValues={{
