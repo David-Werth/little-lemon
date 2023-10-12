@@ -6,10 +6,6 @@ import { ErrorMessage, Field, Formik, Form } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
-// check if exists
-// !exists -> create new
-// exists -> display available times
-
 const dateObj = new Date();
 const month = dateObj.getUTCMonth() + 1;
 const day = dateObj.getUTCDate();

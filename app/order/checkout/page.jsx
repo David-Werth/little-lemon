@@ -228,6 +228,7 @@ const page = () => {
 											value={coupon.toUpperCase()}
 											onChange={(e) => setCoupon(e.target.value)}
 											spellCheck={false}
+											autoComplete="off"
 										/>
 										<button
 											type="button"
