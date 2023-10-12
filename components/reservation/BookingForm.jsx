@@ -17,7 +17,7 @@ const year = dateObj.getUTCFullYear();
 const minDate = year + '-' + month + '-' + day;
 
 const initTimes = [
-	'11:00',
+	'18:00',
 	'18:30',
 	'19:00',
 	'19:30',
