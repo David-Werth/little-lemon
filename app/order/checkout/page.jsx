@@ -49,7 +49,7 @@ const page = () => {
 		street: Yup.string().required('Required'),
 		additional: Yup.string().required('Required'),
 		city: Yup.string().required('Required'),
-		phone: Yup.number('not number').required('Required'),
+		email: Yup.string().email('Please enter valid email').required('Required'),
 		paymentMethod: Yup.string()
 			.required('Required')
 			.test('', '', (value) => {
@@ -70,7 +70,7 @@ const page = () => {
 					street: '',
 					additional: '',
 					city: '',
-					phone: '',
+					email: '',
 					paymentMethod: '',
 					total: 0,
 				}}
@@ -86,7 +86,7 @@ const page = () => {
 									street: values.street,
 									additional: values.additional,
 									city: values.city,
-									phone: values.phone,
+									email: values.email,
 								},
 								cart: cartState,
 								paymentMethod: values.paymentMethod,
@@ -113,7 +113,6 @@ const page = () => {
 							<Field
 								type="text"
 								name="name"
-								id="name"
 								placeholder="John Doe"
 								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
@@ -125,7 +124,6 @@ const page = () => {
 							<Field
 								type="text"
 								name="street"
-								id="street"
 								placeholder="Main Street 10"
 								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
@@ -137,7 +135,6 @@ const page = () => {
 							<Field
 								type="text"
 								name="additional"
-								id="additional"
 								placeholder="Floor 1, Door 11"
 								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
@@ -149,7 +146,6 @@ const page = () => {
 							<Field
 								type="text"
 								name="city"
-								id="city"
 								placeholder="Anytown"
 								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
@@ -157,16 +153,15 @@ const page = () => {
 							<ErrorMessage name="city" />
 						</div>
 						<div className="flex flex-col gap-1">
-							<label htmlFor="phone">Phone number</label>
+							<label htmlFor="email">Email</label>
 							<Field
-								type="number"
-								name="phone"
-								id="phone"
-								placeholder="Your phone number"
+								type="text"
+								name="email"
+								placeholder="Your email address"
 								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
-							<ErrorMessage name="phone" />
+							<ErrorMessage name="email" />
 						</div>
 						<div>
 							<h3>Payment Method:</h3>
@@ -180,12 +175,7 @@ const page = () => {
 								>
 									<FontAwesomeIcon icon={faMoneyBillWave} className="h-12" />
 									<p>Cash</p>
-									<Field
-										type="radio"
-										name="paymentMethod"
-										id="paymentMethod"
-										value="cash"
-									/>
+									<Field type="radio" name="paymentMethod" value="cash" />
 								</label>
 								<label className="flex flex-col items-center justify-center px-5 py-2 text-gray-500 bg-gray-300 border border-gray-400 rounded-md cursor-not-allowed w-28">
 									<FontAwesomeIcon icon={faCreditCard} className="h-12" />
@@ -230,7 +220,6 @@ const page = () => {
 										<input
 											type="text"
 											name="coupon"
-											id="coupon"
 											placeholder="TRY: 5LESS"
 											className="p-4 font-bold border rounded-md border-green"
 											value={coupon.toUpperCase()}
