@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LocalStorageContext } from '@/context/LocalStorageContext';
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 const page = () => {
@@ -23,9 +23,9 @@ const page = () => {
 	const { total } = useContext(TotalCartValueContext);
 	const { cartState, setCartState, updateLocalStorage } =
 		useContext(LocalStorageContext);
+
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-
 	const [coupon, setCoupon] = useState('');
 	const [isCouponValid, setIsCouponValid] = useState(false);
 	const [couponValue, setCouponValue] = useState(0);
@@ -70,11 +70,9 @@ const page = () => {
 					street: '',
 					additional: '',
 					city: '',
-					phone: '',
+					phone: 0,
 					paymentMethod: '',
-					total: isCouponValid
-						? (total + 2.99 - couponValue).toFixed(2)
-						: (total + 2.99).toFixed(2),
+					total: 0,
 				}}
 				validationSchema={deliveryDetailsSchema}
 				onSubmit={async (values) => {
@@ -92,16 +90,19 @@ const page = () => {
 									},
 									cart: cartState,
 									paymentMethod: values.paymentMethod,
-									total: values.total,
+									total: isCouponValid
+										? (total + 2.99 - couponValue).toFixed(2)
+										: (total + 2.99).toFixed(2),
 								}),
 							});
 					} catch (error) {
 						console.log(error);
 					}
 
-					setIsLoading(false), setCartState([]);
+					setCartState([]);
 					updateLocalStorage([]);
 					router.push('/order/success');
+					setIsLoading(false);
 				}}
 			>
 				<Form className="flex flex-col w-11/12 max-w-5xl gap-10 py-10 lg:flex-row font-karla text-green">
