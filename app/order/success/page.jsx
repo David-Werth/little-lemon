@@ -1,8 +1,3 @@
-export const metadata = {
-	title: 'Little Lemon | Order Successful',
-	description: 'Authentic Italian Restaurant',
-};
-
 const page = () => {
 	return (
 		<section className="flex flex-col items-center w-full h-[50vh]">

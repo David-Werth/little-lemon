@@ -6,11 +6,6 @@ import MenuNav from '@/components/order/MenuNav';
 import GoToCart from '@/components/shared/GoToCart';
 import { useEffect, useState } from 'react';
 
-export const metadata = {
-	title: 'Little Lemon | Menu',
-	description: 'Authentic Italian Restaurant',
-};
-
 const getMenuItems = async () => {
 	try {
 		const res = await fetch('/api/menu-items', {
