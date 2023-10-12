@@ -25,22 +25,24 @@ const page = () => {
 		useContext(LocalStorageContext);
 
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
 	const [coupon, setCoupon] = useState('');
 	const [isCouponValid, setIsCouponValid] = useState(false);
 	const [couponValue, setCouponValue] = useState(0);
 
+	const [isCouponLoading, setIsCouponLoading] = useState(false);
+	const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+
 	const handleCouponApply = async () => {
 		try {
-			setIsLoading(true);
+			setIsCouponLoading(true);
 			const res = await fetch(`/api/coupon-codes?code=${coupon.toUpperCase()}`);
 			const { coupons } = await res.json();
 			setCouponValue(coupons.value);
 			setIsCouponValid(true);
-			setIsLoading(false);
+			setIsCouponLoading(false);
 		} catch (error) {
 			setIsCouponValid(false);
-			setIsLoading(false);
+			setIsCouponLoading(false);
 		}
 	};
 
@@ -77,7 +79,7 @@ const page = () => {
 				validationSchema={deliveryDetailsSchema}
 				onSubmit={async (values) => {
 					try {
-						setIsLoading(true);
+						setIsSubmitLoading(true);
 						await fetch('/api/orders', {
 							method: 'POST',
 							body: JSON.stringify({
@@ -97,12 +99,13 @@ const page = () => {
 						});
 					} catch (error) {
 						console.log(error);
+						setIsSubmitLoading(false);
 					}
 
 					setCartState([]);
 					updateLocalStorage([]);
 					router.push('/order/success');
-					setIsLoading(false);
+					setIsSubmitLoading(false);
 				}}
 			>
 				<Form className="flex flex-col w-11/12 max-w-5xl gap-10 py-10 lg:flex-row font-karla text-green">
@@ -231,7 +234,7 @@ const page = () => {
 											className="flex-1 p-4 font-bold transition-colors border rounded-md cursor-pointer border-green hover:bg-green hover:text-white"
 											onClick={handleCouponApply}
 										>
-											{isLoading ? (
+											{isCouponLoading ? (
 												<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
 											) : (
 												'Apply'
@@ -244,7 +247,7 @@ const page = () => {
 								type="submit"
 								className="px-4 py-3 font-bold text-center transition-colors border-4 rounded-full cursor-pointer hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow text-green font-karla"
 							>
-								{isLoading ? (
+								{isSubmitLoading ? (
 									<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
 								) : (
 									'Order now!'
