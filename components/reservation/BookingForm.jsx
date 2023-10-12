@@ -6,24 +6,67 @@ import { ErrorMessage, Field, Formik, Form } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
-const reservationDetailSchema = Yup.object().shape({
-	name: Yup.string().required('Required'),
-	date: Yup.date().required('Required'),
-	time: Yup.string().required('Required'),
-	guests: Yup.number().required('Required'),
-	occasion: Yup.string().required('Required'),
-	email: Yup.string().email('Please enter valid email').required('Required'),
-});
+// check if exists
+// !exists -> create new
+// exists -> display available times
+
+const dateObj = new Date();
+const month = dateObj.getUTCMonth() + 1;
+const day = dateObj.getUTCDate();
+const year = dateObj.getUTCFullYear();
+const minDate = year + '-' + month + '-' + day;
+
+const initTimes = [
+	'11:00',
+	'18:30',
+	'19:00',
+	'19:30',
+	'20:00',
+	'20:30',
+	'21:00',
+	'21:30',
+	'22:00',
+	'22:30',
+];
 
 const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const [isLoading, setIsLoading] = useState(false);
+	const [availableTimes, setAvailableTimes] = useState(initTimes);
+	const [dateExists, setDateExists] = useState(false);
+
+	const handleDateChange = async (date) => {
+		const res = await fetch(`/api/reservations/available-times?date=${date}`);
+		const { availability } = await res.json();
+
+		if (availability) {
+			setAvailableTimes(availability.availableTimes);
+			setDateExists(true);
+		} else {
+			setAvailableTimes(initTimes);
+			setDateExists(false);
+		}
+	};
+
+	const reservationDetailSchema = Yup.object().shape({
+		name: Yup.string().required('Required'),
+		date: Yup.date()
+			.required('Required')
+			.test('', '', (value) => {
+				handleDateChange(value);
+				return true;
+			}),
+		time: Yup.string().required('Required'),
+		guests: Yup.number().required('Required'),
+		occasion: Yup.string().required('Required'),
+		email: Yup.string().email('Please enter valid email').required('Required'),
+	});
 
 	return (
 		<Formik
 			initialValues={{
 				name: '',
 				date: '',
-				time: '18:00',
+				time: availableTimes[0],
 				guests: '1',
 				occasion: 'Birthday',
 				email: '',
@@ -45,6 +88,31 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 					});
 				} catch (error) {
 					console.log(error);
+				}
+				if (!dateExists) {
+					try {
+						await fetch('/api/reservations/available-times', {
+							method: 'POST',
+							body: JSON.stringify({
+								date: values.date,
+								availableTimes: availableTimes.filter((t) => t != values.time),
+							}),
+						});
+					} catch (error) {
+						console.log(error);
+					}
+				} else {
+					try {
+						await fetch(`/api/reservations/available-times`, {
+							method: 'PUT',
+							body: JSON.stringify({
+								date: values.date,
+								availableTimes: availableTimes.filter((t) => t != values.time),
+							}),
+						});
+					} catch (error) {
+						console.log(error);
+					}
 				}
 
 				setFormData(values);
@@ -71,6 +139,7 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 						placeholder="mm/dd/yyyy"
 						name="date"
 						className="p-4 font-bold border rounded-md border-green"
+						min={minDate}
 					/>
 					<ErrorMessage name="date" />
 				</div>
@@ -81,9 +150,9 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 						name="time"
 						className="p-4 font-bold border rounded-md border-green"
 					>
-						<option>18:00</option>
-						<option>18:30</option>
-						<option>19:00</option>
+						{availableTimes.map((t) => {
+							return <option key={t}>{t}</option>;
+						})}
 					</Field>
 					<ErrorMessage name="time" />
 				</div>
