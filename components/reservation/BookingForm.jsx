@@ -1,18 +1,22 @@
 'use client';
 
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ErrorMessage, Field, Formik, Form } from 'formik';
+import { useState } from 'react';
 import * as Yup from 'yup';
 
 const reservationDetailSchema = Yup.object().shape({
 	name: Yup.string().required('Required'),
 	date: Yup.date().required('Required'),
 	time: Yup.string().required('Required'),
-	guests: Yup.string().required('Required'),
+	guests: Yup.number().required('Required'),
 	occasion: Yup.string().required('Required'),
 	email: Yup.string().email('Please enter valid email').required('Required'),
 });
 
-const BookingForm = () => {
+const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
+	const [isLoading, setIsLoading] = useState(false);
 	return (
 		<Formik
 			initialValues={{
@@ -24,9 +28,30 @@ const BookingForm = () => {
 				email: '',
 			}}
 			validationSchema={reservationDetailSchema}
-			onSubmit={async (values) => {}}
+			onSubmit={async (values) => {
+				try {
+					setIsLoading(true);
+					await fetch('/api/reservations', {
+						method: 'POST',
+						body: JSON.stringify({
+							name: values.name,
+							date: values.date,
+							time: values.time,
+							guests: values.guests,
+							occasion: values.occasion,
+							email: values.email,
+						}),
+					});
+				} catch (error) {
+					console.log(error);
+				}
+
+				setFormData(values);
+				setHasBeenSubmitted(true);
+				setIsLoading(false);
+			}}
 		>
-			<Form className="grid justify-center w-full max-w-lg grid-cols-1 gap-10 px-4 py-10 md:grid-cols-2 text-green font-karla">
+			<Form className="grid justify-center w-11/12 h-full max-w-3xl grid-cols-1 gap-10 px-4 py-10 md:grid-cols-2 text-green font-karla">
 				<div className="flex flex-col gap-1">
 					<label htmlFor="name">Your name</label>
 					<Field
@@ -110,7 +135,11 @@ const BookingForm = () => {
 						type="submit"
 						className="px-4 py-3 font-bold text-center transition-colors border-4 rounded-full cursor-pointer hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow text-green font-karla"
 					>
-						Make Your reservation
+						{isLoading ? (
+							<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
+						) : (
+							'Make your reservation'
+						)}
 					</button>
 				</div>
 			</Form>
