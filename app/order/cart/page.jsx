@@ -8,6 +8,11 @@ import OrderSummary from '@/components/order/cart/OrderSummary';
 import ShoppingCart from '@/components/order/cart/ShoppingCart';
 import { TotalCartValueContext } from '@/context/TotalCartValueContext';
 
+export const metadata = {
+	title: 'Little Lemon | Cart',
+	description: 'Authentic Italian Restaurant',
+};
+
 const getMenuItems = async () => {
 	try {
 		const res = await fetch('/api/menu-items', {

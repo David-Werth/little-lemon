@@ -17,6 +17,11 @@ import special3 from '../public/special3.jpg';
 import SpecialsCard from '@/components/main/SpecialsCard';
 import TestimonialCard from '@/components/main/TestimonialCard';
 
+export const metadata = {
+	title: 'Little Lemon',
+	description: 'Authentic Italian Restaurant',
+};
+
 export default function Home() {
 	return (
 		<>

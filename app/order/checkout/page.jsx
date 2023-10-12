@@ -17,6 +17,11 @@ import { LocalStorageContext } from '@/context/LocalStorageContext';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+export const metadata = {
+	title: 'Little Lemon | Checkout',
+	description: 'Authentic Italian Restaurant',
+};
+
 const page = () => {
 	const router = useRouter();
 

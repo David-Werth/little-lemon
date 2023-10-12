@@ -15,11 +15,6 @@ const markazi = Markazi_Text({
 	subsets: ['latin'],
 });
 
-export const metadata = {
-	title: 'Little Lemon',
-	description: 'Authentic Italian Restaurant',
-};
-
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en" className="h-full">

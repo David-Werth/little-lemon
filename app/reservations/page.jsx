@@ -4,6 +4,11 @@ import BookingConfirmation from '@/components/reservation/BookingConfirmation';
 import BookingForm from '@/components/reservation/BookingForm';
 import { useState } from 'react';
 
+export const metadata = {
+	title: 'Little Lemon | Reservations',
+	description: 'Authentic Italian Restaurant',
+};
+
 const Page = () => {
 	const [formData, setFormData] = useState(undefined);
 	const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false);
