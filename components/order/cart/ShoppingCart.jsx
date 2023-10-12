@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import CartItem from './CartItem';
 import CartItemSkeleton from './CartItemSkeleton';
 
@@ -31,6 +32,14 @@ const ShoppingCart = ({ menuItems, isLoading }) => {
 						);
 					})
 				)}
+				{!menuItems[0] && !isLoading ? (
+					<div className="mt-10 mb-10">
+						<h4 className="text-2xl">Oops! Nothing here...🕵🏻‍♂️ </h4>
+						<Link href="/order" className="font-bold underline">
+							Want to add something?
+						</Link>
+					</div>
+				) : null}
 			</div>
 		</div>
 	);
