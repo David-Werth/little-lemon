@@ -27,19 +27,26 @@ const initTimes = [
 
 const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const [isLoading, setIsLoading] = useState(false);
+	const [isLoadingTimes, setIsLoadingTimes] = useState(false);
 	const [availableTimes, setAvailableTimes] = useState(initTimes);
 	const [dateExists, setDateExists] = useState(false);
 
 	const handleDateChange = async (date) => {
-		const res = await fetch(`/api/reservations/available-times?date=${date}`);
-		const { availability } = await res.json();
-
-		if (availability) {
-			setAvailableTimes(availability.availableTimes);
-			setDateExists(true);
-		} else {
-			setAvailableTimes(initTimes);
-			setDateExists(false);
+		try {
+			setIsLoadingTimes(true);
+			const res = await fetch(`/api/reservations/available-times?date=${date}`);
+			const { availability } = await res.json();
+			if (availability) {
+				setAvailableTimes(availability.availableTimes);
+				setDateExists(true);
+				setIsLoadingTimes(false);
+			} else {
+				setAvailableTimes(initTimes);
+				setDateExists(false);
+				setIsLoadingTimes(false);
+			}
+		} catch (error) {
+			setIsLoadingTimes(false);
 		}
 	};
 
@@ -140,7 +147,14 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 					<ErrorMessage name="date" />
 				</div>
 				<div className="flex flex-col gap-1">
-					<label htmlFor="time">Choose time</label>
+					<label htmlFor="time">
+						Choose time{' '}
+						<span>
+							{isLoadingTimes ? (
+								<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
+							) : null}
+						</span>
+					</label>
 					<Field
 						as="select"
 						name="time"
@@ -199,7 +213,7 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 				<div className="text-center md:col-span-2">
 					<button
 						type="submit"
-						className="px-4 py-3 font-bold text-center transition-colors border-4 rounded-full cursor-pointer hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow text-green font-karla"
+						className="px-4 py-3 min-w-[198px] font-bold text-center transition-colors border-4 rounded-full cursor-pointer hover:bg-green hover:border-green hover:text-white border-yellow bg-yellow text-green font-karla"
 					>
 						{isLoading ? (
 							<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
