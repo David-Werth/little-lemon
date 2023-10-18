@@ -1,3 +1,5 @@
-# Use this link for a live demo of the website: [LIVE DEMO](https://little-lemon.davidwerth.com/)
+# Little Lemon
 
-This is a [Next.js](https://nextjs.org/) project and the final project for the Meta Front-End Developer Professional Certificate.
+- A full-stack web solution for an italian restaurant allowing viewers to book a table as well as view and order a delivery from the online menu.
+- Technologies Used: Next.js, React, MongoDB, Tailwind.css
+- Demo: https://little-lemon.davidwerth.com/
