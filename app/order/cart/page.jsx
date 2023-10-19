@@ -7,21 +7,7 @@ import { LocalStorageContext } from '@/context/LocalStorageContext';
 import OrderSummary from '@/components/order/cart/OrderSummary';
 import ShoppingCart from '@/components/order/cart/ShoppingCart';
 import { TotalCartValueContext } from '@/context/TotalCartValueContext';
-
-const getMenuItems = async () => {
-	try {
-		const res = await fetch('/api/menu-items', {
-			// cache: 'no-store',
-		});
-
-		if (!res.ok) {
-			throw new Error('Failed to fetch menu items');
-		}
-		return res.json();
-	} catch (error) {
-		console.log('Error loading menu items:', error);
-	}
-};
+import { getAllMenuItems } from '@/libs/actions/menu.actions';
 
 const page = () => {
 	const { cartState } = useContext(LocalStorageContext);
@@ -31,7 +17,7 @@ const page = () => {
 
 	useEffect(() => {
 		(async () => {
-			const { menuItems } = await getMenuItems();
+			const menuItems = await getAllMenuItems();
 			let filteredMenuItems = [];
 			setIsLoading(true);
 

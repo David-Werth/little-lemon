@@ -1,5 +1,11 @@
 'use client';
 
+import {
+	createAvailableTimes,
+	getAvailableTimes,
+	submitReservation,
+	updateAvailableTimes,
+} from '@/libs/actions/reservation.actions';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ErrorMessage, Field, Formik, Form } from 'formik';
@@ -31,21 +37,17 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const [availableTimes, setAvailableTimes] = useState(initTimes);
 	const [dateExists, setDateExists] = useState(false);
 
-	const handleDateChange = async (date) => {
-		try {
-			setIsLoadingTimes(true);
-			const res = await fetch(`/api/reservations/available-times?date=${date}`);
-			const { availability } = await res.json();
-			if (availability) {
-				setAvailableTimes(availability.availableTimes);
-				setDateExists(true);
-				setIsLoadingTimes(false);
-			} else {
-				setAvailableTimes(initTimes);
-				setDateExists(false);
-				setIsLoadingTimes(false);
-			}
-		} catch (error) {
+	const handleDateChange = async (selectedDate) => {
+		setIsLoadingTimes(true);
+		const times = await getAvailableTimes(selectedDate);
+		console.log(times, selectedDate);
+		if (times) {
+			setAvailableTimes(times);
+			setDateExists(true);
+			setIsLoadingTimes(false);
+		} else {
+			setAvailableTimes(initTimes);
+			setDateExists(false);
 			setIsLoadingTimes(false);
 		}
 	};
@@ -53,11 +55,11 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const reservationDetailSchema = Yup.object().shape({
 		name: Yup.string().required('Required'),
 		date: Yup.date()
-			.required('Required')
 			.test('', '', (value) => {
 				handleDateChange(value);
 				return true;
-			}),
+			})
+			.required('Required'),
 		time: Yup.string().required('Required'),
 		guests: Yup.number().required('Required'),
 		occasion: Yup.string().required('Required'),
@@ -76,46 +78,26 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 			}}
 			validationSchema={reservationDetailSchema}
 			onSubmit={async (values) => {
-				try {
-					setIsLoading(true);
-					await fetch('/api/reservations', {
-						method: 'POST',
-						body: JSON.stringify({
-							name: values.name,
-							date: values.date,
-							time: values.time,
-							guests: values.guests,
-							occasion: values.occasion,
-							email: values.email,
-						}),
-					});
-				} catch (error) {
-					console.log(error);
-				}
+				setIsLoading(true);
+				await submitReservation({
+					name: values.name,
+					date: values.date,
+					time: values.time,
+					guests: values.guests,
+					occasion: values.occasion,
+					email: values.email,
+				});
+
 				if (!dateExists) {
-					try {
-						await fetch('/api/reservations/available-times', {
-							method: 'POST',
-							body: JSON.stringify({
-								date: values.date,
-								availableTimes: availableTimes.filter((t) => t != values.time),
-							}),
-						});
-					} catch (error) {
-						console.log(error);
-					}
+					await createAvailableTimes({
+						date: values.date,
+						availableTimes: availableTimes.filter((t) => t != values.time),
+					});
 				} else {
-					try {
-						await fetch(`/api/reservations/available-times`, {
-							method: 'PUT',
-							body: JSON.stringify({
-								date: values.date,
-								availableTimes: availableTimes.filter((t) => t != values.time),
-							}),
-						});
-					} catch (error) {
-						console.log(error);
-					}
+					await updateAvailableTimes({
+						date: values.date,
+						availableTimes: availableTimes.filter((t) => t != values.time),
+					});
 				}
 
 				setFormData(values);
