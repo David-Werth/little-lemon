@@ -37,6 +37,8 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const [availableTimes, setAvailableTimes] = useState(initTimes);
 	const [dateExists, setDateExists] = useState(false);
 
+	const [prevDate, setPrevDate] = useState('');
+
 	const handleDateChange = async (selectedDate) => {
 		try {
 			setIsLoadingTimes(true);
@@ -60,8 +62,14 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 		date: Yup.date()
 			.required('Required')
 			.test('', '', (value) => {
-				handleDateChange(value);
-				return true;
+				if (prevDate.toString() != value.toString()) {
+					handleDateChange(value);
+					setPrevDate(value);
+					return true;
+				} else {
+					setPrevDate(value);
+					return true;
+				}
 			}),
 		time: Yup.string().required('Required'),
 		guests: Yup.number().required('Required'),
@@ -102,6 +110,7 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 						availableTimes: availableTimes.filter((t) => t != values.time),
 					});
 				}
+				console.log(values, 'values');
 
 				setFormData(values);
 				setHasBeenSubmitted(true);
