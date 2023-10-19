@@ -40,7 +40,7 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const handleDateChange = async (selectedDate) => {
 		try {
 			setIsLoadingTimes(true);
-			const date = await getAvailableTimes({ selectedDate: selectedDate });
+			const date = await getAvailableTimes(selectedDate);
 			if (date) {
 				setAvailableTimes(date.availableTimes);
 				setDateExists(true);
@@ -53,19 +53,6 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 		} catch (error) {
 			setIsLoadingTimes(false);
 		}
-
-		// setIsLoadingTimes(true);
-		// const times = await getAvailableTimes(selectedDate);
-		// console.log(times, selectedDate);
-		// if (times) {
-		// 	setAvailableTimes(times);
-		// 	setDateExists(true);
-		// 	setIsLoadingTimes(false);
-		// } else {
-		// 	setAvailableTimes(initTimes);
-		// 	setDateExists(false);
-		// 	setIsLoadingTimes(false);
-		// }
 	};
 
 	const reservationDetailSchema = Yup.object().shape({

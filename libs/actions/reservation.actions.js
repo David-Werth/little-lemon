@@ -20,16 +20,17 @@ export async function submitReservation({
 	}
 }
 
-export async function getAvailableTimes({ selectedDate }) {
+export async function getAvailableTimes(selectedDate) {
 	try {
 		await connectMongoDB();
+		const result = await JSON.parse(
+			JSON.stringify(
+				await Availability.findOne({
+					date: selectedDate.toString().replace('+', ' '),
+				})
+			)
+		);
 
-		const result = await Availability.findOne({
-			date: selectedDate.toISOString(),
-		});
-
-		console.log(selectedDate, 'got');
-		console.log(result);
 		return result;
 	} catch (error) {
 		console.log(error);
@@ -39,8 +40,10 @@ export async function getAvailableTimes({ selectedDate }) {
 export async function createAvailableTimes({ date, availableTimes }) {
 	try {
 		await connectMongoDB();
-		await Availability.create({ date: date, availableTimes: availableTimes });
-		console.log({ date, availableTimes }, 'created');
+		await Availability.create({
+			date: date.toString().replace('+', ' '),
+			availableTimes: availableTimes,
+		});
 	} catch (error) {
 		console.log(error);
 	}
@@ -50,10 +53,9 @@ export async function updateAvailableTimes({ date, availableTimes }) {
 	try {
 		await connectMongoDB();
 		await Availability.findOneAndUpdate(
-			{ date: date },
+			{ date: date.toString().replace('+', ' ') },
 			{ availableTimes: availableTimes }
 		);
-		console.log({ date, availableTimes }, 'updated');
 	} catch (error) {
 		console.log(error);
 	}
