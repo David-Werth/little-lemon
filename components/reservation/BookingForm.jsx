@@ -38,28 +38,44 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const [dateExists, setDateExists] = useState(false);
 
 	const handleDateChange = async (selectedDate) => {
-		setIsLoadingTimes(true);
-		const times = await getAvailableTimes(selectedDate);
-		console.log(times, selectedDate);
-		if (times) {
-			setAvailableTimes(times);
-			setDateExists(true);
-			setIsLoadingTimes(false);
-		} else {
-			setAvailableTimes(initTimes);
-			setDateExists(false);
+		try {
+			setIsLoadingTimes(true);
+			const date = await getAvailableTimes({ selectedDate: selectedDate });
+			if (date) {
+				setAvailableTimes(date.availableTimes);
+				setDateExists(true);
+				setIsLoadingTimes(false);
+			} else {
+				setAvailableTimes(initTimes);
+				setDateExists(false);
+				setIsLoadingTimes(false);
+			}
+		} catch (error) {
 			setIsLoadingTimes(false);
 		}
+
+		// setIsLoadingTimes(true);
+		// const times = await getAvailableTimes(selectedDate);
+		// console.log(times, selectedDate);
+		// if (times) {
+		// 	setAvailableTimes(times);
+		// 	setDateExists(true);
+		// 	setIsLoadingTimes(false);
+		// } else {
+		// 	setAvailableTimes(initTimes);
+		// 	setDateExists(false);
+		// 	setIsLoadingTimes(false);
+		// }
 	};
 
 	const reservationDetailSchema = Yup.object().shape({
 		name: Yup.string().required('Required'),
 		date: Yup.date()
+			.required('Required')
 			.test('', '', (value) => {
 				handleDateChange(value);
 				return true;
-			})
-			.required('Required'),
+			}),
 		time: Yup.string().required('Required'),
 		guests: Yup.number().required('Required'),
 		occasion: Yup.string().required('Required'),
