@@ -43,7 +43,9 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 		console.log('handleDateChange running with', selectedDate);
 		try {
 			setIsLoadingTimes(true);
-			const date = await getAvailableTimes(selectedDate);
+			const date = await getAvailableTimes(
+				selectedDate.toString().replace('+', ' ')
+			);
 			console.log('returned date data ', date);
 			if (date) {
 				setAvailableTimes(date.availableTimes);
@@ -104,12 +106,12 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 
 			if (!dateExists) {
 				await createAvailableTimes({
-					date: values.date,
+					date: values.date.toString().replace('+', ' '),
 					availableTimes: availableTimes.filter((t) => t != values.time),
 				});
 			} else {
 				await updateAvailableTimes({
-					date: values.date,
+					date: values.date.toString().replace('+', ' '),
 					availableTimes: availableTimes.filter((t) => t != values.time),
 				});
 			}
