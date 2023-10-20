@@ -21,19 +21,17 @@ export async function submitReservation({
 }
 
 export async function getAvailableTimes(selectedDate) {
+	console.log('server date unformatted: ', selectedDate);
+	console.log(
+		'server date formatted: ',
+		selectedDate.toString().replace('+', ' ')
+	);
 	try {
 		await connectMongoDB();
-		// const result = await JSON.parse(
-		// 	JSON.stringify(
-		// 		await Availability.findOne({
-		// 			date: selectedDate.toString().replace('+', ' '),
-		// 		})
-		// 	)
-		// );
 		const result = await JSON.parse(
 			JSON.stringify(
 				await Availability.findOne({
-					date: selectedDate,
+					date: selectedDate.toString().replace('+', ' '),
 				})
 			)
 		);
