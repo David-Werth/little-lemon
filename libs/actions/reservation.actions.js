@@ -21,6 +21,7 @@ export async function submitReservation({
 }
 
 export async function getAvailableTimes(selectedDate) {
+	console.log('selectedDate', selectedDate);
 	try {
 		await connectMongoDB();
 		const result = await JSON.parse(
@@ -32,11 +33,6 @@ export async function getAvailableTimes(selectedDate) {
 		);
 
 		console.log('result: ', result);
-		console.log(
-			await Availability.findOne({
-				date: selectedDate.toString().replace('+', ' '),
-			})
-		);
 		return result;
 	} catch (error) {
 		console.log(error);
