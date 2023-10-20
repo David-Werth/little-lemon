@@ -4,22 +4,8 @@ import MenuItem from '@/components/order/MenuItem';
 import MenuItemSkeleton from '@/components/order/MenuItemSkeleton';
 import MenuNav from '@/components/order/MenuNav';
 import GoToCart from '@/components/shared/GoToCart';
+import { getAllMenuItems } from '@/libs/actions/menu.actions';
 import { useEffect, useState } from 'react';
-
-const getMenuItems = async () => {
-	try {
-		const res = await fetch('/api/menu-items', {
-			// cache: 'no-store',
-		});
-
-		if (!res.ok) {
-			throw new Error('Failed to fetch menu items');
-		}
-		return res.json();
-	} catch (error) {
-		console.log('Error loading menu items:', error);
-	}
-};
 
 const Page = () => {
 	const [menuItems, setMenuItems] = useState([]);
@@ -28,7 +14,7 @@ const Page = () => {
 	useEffect(() => {
 		(async () => {
 			setIsLoading(true);
-			const { menuItems } = await getMenuItems();
+			const menuItems = await getAllMenuItems();
 			setMenuItems(menuItems);
 			setIsLoading(false);
 		})();
