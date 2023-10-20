@@ -40,13 +40,11 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 	const [prevDate, setPrevDate] = useState('');
 
 	const handleDateChange = async (selectedDate) => {
-		console.log('handleDateChange running with', selectedDate);
 		try {
 			setIsLoadingTimes(true);
 			const date = await getAvailableTimes(
 				selectedDate.toString().replace('+', ' ')
 			);
-			console.log('returned date data ', date);
 			if (date) {
 				setAvailableTimes(date.availableTimes);
 				setDateExists(true);
@@ -59,8 +57,6 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 		} catch (error) {
 			setIsLoadingTimes(false);
 		}
-
-		console.log('availableTimes after fetch ', availableTimes);
 	};
 
 	const reservationDetailSchema = Yup.object().shape({
@@ -115,7 +111,6 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 					availableTimes: availableTimes.filter((t) => t != values.time),
 				});
 			}
-			console.log(values, 'values');
 
 			setFormData(values);
 			setHasBeenSubmitted(true);
