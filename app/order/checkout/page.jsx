@@ -16,6 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LocalStorageContext } from '@/context/LocalStorageContext';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { getCoupon } from '@/libs/actions/coupon.actions';
+import { submitOrder } from '@/libs/actions/order.actions';
 
 const page = () => {
 	const router = useRouter();
@@ -33,14 +35,14 @@ const page = () => {
 	const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
 	const handleCouponApply = async () => {
-		try {
-			setIsCouponLoading(true);
-			const res = await fetch(`/api/coupon-codes?code=${coupon.toUpperCase()}`);
-			const { coupons } = await res.json();
-			setCouponValue(coupons.value);
+		setIsCouponLoading(true);
+		const dbCouponValue = await getCoupon(coupon.toUpperCase());
+		setIsCouponLoading(true);
+		if (dbCouponValue) {
+			setCouponValue(dbCouponValue);
 			setIsCouponValid(true);
 			setIsCouponLoading(false);
-		} catch (error) {
+		} else {
 			setIsCouponValid(false);
 			setIsCouponLoading(false);
 		}
@@ -78,29 +80,21 @@ const page = () => {
 				}}
 				validationSchema={deliveryDetailsSchema}
 				onSubmit={async (values) => {
-					try {
-						setIsSubmitLoading(true);
-						await fetch('/api/orders', {
-							method: 'POST',
-							body: JSON.stringify({
-								userDetails: {
-									name: values.name,
-									street: values.street,
-									additional: values.additional,
-									city: values.city,
-									email: values.email,
-								},
-								cart: cartState,
-								paymentMethod: values.paymentMethod,
-								total: isCouponValid
-									? (total + 2.99 - couponValue).toFixed(2)
-									: (total + 2.99).toFixed(2),
-							}),
-						});
-					} catch (error) {
-						console.log(error);
-						setIsSubmitLoading(false);
-					}
+					setIsSubmitLoading(true);
+					await submitOrder({
+						userDetails: {
+							name: values.name,
+							street: values.street,
+							additional: values.additional,
+							city: values.city,
+							email: values.email,
+						},
+						cart: cartState,
+						paymentMethod: values.paymentMethod,
+						total: isCouponValid
+							? (total + 2.99 - couponValue).toFixed(2)
+							: (total + 2.99).toFixed(2),
+					});
 
 					setCartState([]);
 					updateLocalStorage([]);
