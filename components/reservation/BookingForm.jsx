@@ -79,12 +79,13 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 
 	return (
 		<Formik
+			enableReinitialize={true}
 			initialValues={{
 				name: '',
 				date: '',
-				time: availableTimes[0],
-				guests: '1',
-				occasion: 'Birthday',
+				time: '',
+				guests: '',
+				occasion: '',
 				email: '',
 			}}
 			validationSchema={reservationDetailSchema}
@@ -135,7 +136,7 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 						type="date"
 						placeholder="mm/dd/yyyy"
 						name="date"
-						className="p-4 font-bold border rounded-md border-green"
+						className="p-4 font-bold text-gray-400 border rounded-md border-green focus:text-green"
 						min={minDate}
 					/>
 					<ErrorMessage name="date" />
@@ -152,8 +153,9 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 					<Field
 						as="select"
 						name="time"
-						className="p-4 font-bold border rounded-md border-green"
+						className="p-4 font-bold text-gray-400 border rounded-md border-green focus:text-green"
 					>
+						<option hidden>Choose a time</option>
 						{availableTimes.map((t) => {
 							return <option key={t}>{t}</option>;
 						})}
@@ -165,8 +167,9 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 					<Field
 						as="select"
 						name="guests"
-						className="p-4 font-bold border rounded-md border-green"
+						className="p-4 font-bold text-gray-400 border rounded-md border-green focus:text-green"
 					>
+						<option hidden>Choose number of guests</option>
 						<option>1</option>
 						<option>2</option>
 						<option>3</option>
@@ -185,8 +188,9 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 					<Field
 						as="select"
 						name="occasion"
-						className="p-4 font-bold border rounded-md border-green"
+						className="p-4 font-bold text-gray-400 border rounded-md border-green focus:text-green"
 					>
+						<option hidden>Choose an occasion</option>
 						<option>Birthday</option>
 						<option>Anniversary</option>
 						<option>Other</option>
@@ -212,7 +216,7 @@ const BookingForm = ({ setFormData, setHasBeenSubmitted }) => {
 						{isLoading ? (
 							<FontAwesomeIcon className="animate-spin" icon={faSpinner} />
 						) : (
-							'Make your reservation'
+							'Confirm'
 						)}
 					</button>
 				</div>
