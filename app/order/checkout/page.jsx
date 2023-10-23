@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { TotalCartValueContext } from '@/context/TotalCartValueContext';
 
@@ -20,7 +20,9 @@ import { getCoupon } from '@/libs/actions/coupon.actions';
 import { submitOrder } from '@/libs/actions/order.actions';
 
 const page = () => {
+	const router = useRouter();
 	const { total } = useContext(TotalCartValueContext);
+
 	const { cartState, setCartState, updateLocalStorage } =
 		useContext(LocalStorageContext);
 
@@ -61,6 +63,12 @@ const page = () => {
 			}),
 		total: Yup.number(),
 	});
+
+	useEffect(() => {
+		if (total == 0) {
+			router.push('/order/cart');
+		}
+	}, []);
 
 	return (
 		<section className="flex flex-col items-center w-full">
