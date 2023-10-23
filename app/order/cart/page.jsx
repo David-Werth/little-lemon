@@ -3,11 +3,11 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { LocalStorageContext } from '@/context/LocalStorageContext';
+import { TotalCartValueContext } from '@/context/TotalCartValueContext';
+import { getAllMenuItems } from '@/libs/actions/menu.actions';
 
 import OrderSummary from '@/components/order/cart/OrderSummary';
 import ShoppingCart from '@/components/order/cart/ShoppingCart';
-import { TotalCartValueContext } from '@/context/TotalCartValueContext';
-import { getAllMenuItems } from '@/libs/actions/menu.actions';
 
 const page = () => {
 	const { cartState } = useContext(LocalStorageContext);

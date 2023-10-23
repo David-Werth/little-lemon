@@ -20,13 +20,12 @@ import { getCoupon } from '@/libs/actions/coupon.actions';
 import { submitOrder } from '@/libs/actions/order.actions';
 
 const page = () => {
-	const router = useRouter();
-
 	const { total } = useContext(TotalCartValueContext);
 	const { cartState, setCartState, updateLocalStorage } =
 		useContext(LocalStorageContext);
 
 	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+
 	const [coupon, setCoupon] = useState('');
 	const [isCouponValid, setIsCouponValid] = useState(false);
 	const [couponValue, setCouponValue] = useState(0);
