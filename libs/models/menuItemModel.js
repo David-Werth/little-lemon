@@ -21,6 +21,10 @@ const menuItemSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	isSpecial: {
+		type: Boolean,
+		required: false,
+	},
 });
 
 export const MenuItem =
