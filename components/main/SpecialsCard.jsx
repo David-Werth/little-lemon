@@ -10,6 +10,8 @@ const SpecialsCard = ({ img, title, price, description }) => {
 				<Image
 					src={img}
 					alt={title}
+					width={500}
+					height={500}
 					className="object-cover w-full transition-all h-52 "
 				/>
 			</div>

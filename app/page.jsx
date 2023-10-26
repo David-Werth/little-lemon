@@ -10,12 +10,8 @@ import customer2 from '../public/customer2.jpg';
 import customer3 from '../public/customer3.jpg';
 import customer4 from '../public/customer4.jpg';
 
-import special1 from '../public/special1.jpg';
-import special2 from '../public/special2.jpg';
-import special3 from '../public/special3.jpg';
-
-import SpecialsCard from '@/components/main/SpecialsCard';
 import TestimonialCard from '@/components/main/TestimonialCard';
+import { Specials } from '@/components/main/Specials';
 
 export default function Home() {
 	return (
@@ -61,32 +57,7 @@ export default function Home() {
 							Online Menu
 						</Link>
 					</div>
-					<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-						<SpecialsCard
-							img={special1}
-							title={'Greek Salad'}
-							price={'$6.99'}
-							description={
-								'The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.'
-							}
-						/>
-						<SpecialsCard
-							img={special2}
-							title={'Bruschetta'}
-							price={'$5.99'}
-							description={
-								'Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.'
-							}
-						/>
-						<SpecialsCard
-							img={special3}
-							title={'Lemon Dessert'}
-							price={'$4.99'}
-							description={
-								"This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined."
-							}
-						/>
-					</div>
+					<Specials />
 				</div>
 			</section>
 			<section className="flex justify-center py-10 text-white bg-green">
