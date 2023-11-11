@@ -161,7 +161,7 @@ const page = () => {
 							<Field
 								type="text"
 								name="email"
-								placeholder="Your email address"
+								placeholder="You may enter a fake email"
 								autoComplete="off"
 								className="p-4 font-bold border rounded-md border-green"
 							/>
