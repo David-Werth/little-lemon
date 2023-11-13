@@ -1,5 +1,14 @@
 # Little Lemon
 
-- A full-stack web solution for an italian restaurant allowing viewers to book a table as well as view and order a delivery from the online menu.
-- Technologies Used: Next.js, React, MongoDB, Tailwind.css
-- Demo: https://little-lemon.davidwerth.com/
+- Little Lemon is a full-stack web solution designed for an Italian restaurant. It enables users to conveniently book a table and explore the online menu for delivery orders.
+  
+## Technologies Used:
+
+- Next.js
+- React
+- MongoDB
+- Tailwind.css
+
+## Demo
+
+[Little Lemon Demo](https://little-lemon.davidwerth.com/)
